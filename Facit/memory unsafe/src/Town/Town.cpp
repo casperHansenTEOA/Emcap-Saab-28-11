@@ -50,6 +50,11 @@ const std::vector<Garage*>& Town::getGarages() const{
     return garages;
 };
 
+Garage* buildGarage(){ // this is not memory safe because it returns a pointer to a new object that is not deleted
+    Garage* garage = new Garage();
+    return garage;
+};
+
 
 void Town::run(){
     while(true){

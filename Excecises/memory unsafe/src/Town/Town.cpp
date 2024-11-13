@@ -50,6 +50,11 @@ const std::vector<Garage*>& Town::getGarages() const{
     return garages;
 };
 
+Garage* buildGarage(){
+    Garage* garage = new Garage();
+    return garage;
+};
+
 
 void Town::run(){
     while(true){
