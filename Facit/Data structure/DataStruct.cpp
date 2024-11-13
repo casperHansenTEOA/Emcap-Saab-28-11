@@ -1,3 +1,25 @@
+
+// Vänd håll på ett ord utan reverse-funktionen
+
+// use a stack to reverse a string
+#include <iostream>
+#include <stack>
+#include <string>
+
+// std::string reverseString(std::string s) {
+//     std::stack<char> st;
+//     for (char c : s) {
+//         st.push(c);
+//     }
+//     std::string res;
+//     while (!st.empty()) {
+//         res += st.top();
+//         st.pop();
+//     }
+//     return res;
+// }
+
+
 //Skriv en quicksort
 
 #include <iostream>
