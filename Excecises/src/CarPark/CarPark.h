@@ -16,7 +16,7 @@
  * 
  * @return A randomly generated license plate.
  */
-std::string generateRandomLicensePlate();
+char* generateRandomLicensePlate();
 
 /**
  * @brief Represents a geographical location with x and y coordinates.

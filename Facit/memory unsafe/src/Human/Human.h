@@ -74,6 +74,13 @@ public:
      */
     std::string getName() const;    
 
+    /**
+     * @brief Clones the human.
+     * 
+     * @return A pointer to the cloned human.
+     */
+    Human* clone();
+
 private:
     std::string* name; ///< Pointer to the name string.
     Garage* garage; ///< Pointer to the garage owned by the human.

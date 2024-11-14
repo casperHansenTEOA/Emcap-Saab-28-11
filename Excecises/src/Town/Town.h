@@ -72,6 +72,16 @@ public:
      * @return A vector of pointers to the garages in the town.
      */
     const std::vector<Garage*>& getGarages() const;
+
+    /**
+     * @brief Builds a garage.
+     * 
+     * @return Pointer to the garage that was built.
+     */
+    Garage* buildGarage(); 
+
+
+
     /**
      * @brief Runs the simulation for a specified number of time steps, performing random actions.
      */
@@ -105,6 +115,18 @@ private:
      * @brief Uses a random garage in the town.
      */
     void useRandomGarage();
+
+    /**
+     * @brief clones a random human
+     *
+     */
+    void cloneRandomHuman();
+
+    /**
+    * @birief builds n random cars
+    *
+     */
+     std::vector<Car * >buildNRandomCars(int n);
 };
 
 #endif // TOWN_H

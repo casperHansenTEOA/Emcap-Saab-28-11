@@ -15,8 +15,8 @@
  * 
  * @return A randomly generated license plate.
  */
-std::string generateRandomLicensePlate(){
-    std::string licensePlate = "";
+char* generateRandomLicensePlate(){
+    char* licensePlate = "";
     for (int i = 0; i < 3; ++i){
         licensePlate += 'A' + rand() % 26;
     }

@@ -38,3 +38,5 @@ bool Truck::move(){
 bool Truck::stop(){
     return vehicle.stop();
 }
+
+

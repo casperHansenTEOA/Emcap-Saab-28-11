@@ -50,10 +50,12 @@ const std::vector<Garage*>& Town::getGarages() const{
     return garages;
 };
 
-Garage* buildGarage(){ // this is not memory safe because it returns a pointer to a new object that is not deleted
+Garage* Town::buildGarage(){ // this is not memory safe because it returns a pointer to a new object that is not deleted
     Garage* garage = new Garage();
     return garage;
-};
+}
+
+
 
 
 void Town::run(){
@@ -75,6 +77,15 @@ void Town::run(){
             case 4:
                 useRandomGarage();
                 break;
+            case 5:
+                cloneRandomHuman();
+                break;
+            case 6:
+                std::vector<Car*> cars = buildNRandomCars(2);
+                for (Car* car : cars){
+                    addCar(car);
+                }
+                
         }
     }
 };
@@ -89,6 +100,7 @@ void Town::moveRandomCar(){
         cars.push_back(car);
     }
 };
+
 
 /**
     * @brief Moves a random truck in the town.
@@ -115,6 +127,25 @@ void Town::humanInteractsWithCar(){
     }
 };
 
+
+std::vector<Car*> Town::buildNRandomCars(int n){
+    char * * licensePlates = new char * [n];
+
+    for (int i = 0; i < n; ++i){
+        licensePlates[i] = generateRandomLicensePlate();
+    }
+
+    std::vector<Car*> cars;
+
+    for (int i = 0; i < n; ++i){
+        Car* car = new Car(licensePlates[i]);
+        cars.push_back(car);
+    }
+
+    return cars;
+    
+};
+
 /**
     * @brief A human interacts with a random truck in the town.
     */
@@ -134,5 +165,14 @@ void Town::useRandomGarage(){
         int randomIndex = rand() % garages.size();
         Garage* garage = garages[randomIndex];
         garage->listVehicles();
+    }
+};
+
+void Town::cloneRandomHuman(){
+    if (humans.size() > 0){
+        int randomIndex = rand() % humans.size();
+        Human* human = humans[randomIndex];
+        Human* clone = human->clone(); // this is not memory safe because it returns a pointer to a new object that is not deleted
+        humans.push_back(clone);
     }
 };

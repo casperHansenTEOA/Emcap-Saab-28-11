@@ -1,4 +1,5 @@
 #include "Garage.h"
+#include <vector>
 
 Garage::Garage(){
     cars = std::vector<Car*>();
@@ -34,13 +35,23 @@ Truck* Garage::takeTruck(const std::string& licensePlate){
 };
 
 
- void Garage::listVehicles() const{
+ std::vector<Vehicle*> Garage::listVehicles() const{
+    std::vector <Car*> cars = this->cars;
+    std::vector <Truck*> trucks = this->trucks;
+
+    std::vector<Vehicle *> vehicles;
     for (Car* car : cars){
         std::cout << "Car: " << car->getLicensePlate() << std::endl;
+        vehicles.push_back(new Vehicle(car->getLicensePlate()));
+        
     }
     for (Truck* truck : trucks){
         std::cout << "Truck: " << truck->getLicensePlate() << std::endl;
+        vehicles.push_back(new Vehicle(truck->getLicensePlate()));
     }
+
+    return vehicles;
+
 };
 
 

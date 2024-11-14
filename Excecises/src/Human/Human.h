@@ -14,10 +14,6 @@ public:
      */
     Human(const std::string& name);
 
-    /**
-     * @brief Destructor for Human. 
-     */ 
-    ~Human();
 
     /**
      * @brief Purchases a car with the given license plate and adds it to the human's garage.
@@ -73,6 +69,13 @@ public:
      * @return The name of the human.
      */
     std::string getName() const;    
+
+    /**
+     * @brief Clones the human.
+     * 
+     * @return A pointer to the cloned human.
+     */
+    Human* clone();
 
 private:
     std::string* name; ///< Pointer to the name string.

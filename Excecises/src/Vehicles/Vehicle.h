@@ -42,7 +42,7 @@ public:
      */
     bool stop();
 
-    
+
     virtual ~Vehicle() = default; 
 
 

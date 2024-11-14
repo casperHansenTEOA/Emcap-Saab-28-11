@@ -1,4 +1,5 @@
 #include "Town/Town.h"
+#include <vector>
 
 /**
  * @brief The main function that initializes the town and runs the simulation.
@@ -8,7 +9,7 @@
 int main(){
    
 
-    Town * town = new Town(); //TODO memory leak why is this even an instance lmao
+    Town * town = new Town(); 
      //generates a bumch of random cars and car parks and garages and humans and traucks and runs the simulation
     for (int i = 0; i < 100; ++i) {
         // Create random cars
@@ -23,9 +24,17 @@ int main(){
         Human* human = new Human("Human" + std::to_string(i));
         town->addHuman(human);
 
-        // Create random garages
-        Garage* garage = new Garage();
-        town->addGarage(garage);
+
+
+        // Create random garages that dont bleong to any human
+        for (int j = 0; j < 10; ++j) {
+                Garage * garage = town->buildGarage();
+                town->addGarage(garage);
+          
+        }
+
+
+
 
         // Create random car parks
         Location location = {static_cast<double>(rand() % 100), static_cast<double>(rand() % 100)};
@@ -40,8 +49,9 @@ int main(){
         // Human lists owned vehicles
         human->listOwnedVehicles();
 
-        // Garage lists vehicles
-        garage->listVehicles();
+        
+
+       
     }
 
     town->run();

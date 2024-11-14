@@ -43,6 +43,6 @@ public:
     ~Car();
 private:
     Vehicle vehicle; ///< The vehicle object representing the car.
-    std::string* licensePlate; //TODO dulicate licensePlate
+    std::string* licensePlate;
 };
 #endif // CAR_H

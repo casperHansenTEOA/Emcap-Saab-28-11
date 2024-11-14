@@ -66,9 +66,6 @@ public:
     bool stop();
 
 
-
-    ~Truck();
-
 private:
     Vehicle vehicle; ///< The vehicle object representing the truck.
     std::vector<double>* cargoWeights; ///< Pointer to a vector of cargo weights.

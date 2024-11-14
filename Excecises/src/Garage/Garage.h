@@ -47,9 +47,7 @@ public:
     /**
      * @brief Lists all vehicles currently in the garage.
      */
-    void listVehicles() const;
-
-    ~Garage();
+    std::vector<Vehicle *> listVehicles() const;
 
 private:
     std::vector<Car*> cars; ///< Vector of pointers to cars in the garage.

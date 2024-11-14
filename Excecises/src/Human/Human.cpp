@@ -41,5 +41,10 @@ std::string Human::getName() const{
     return *name;
 };
 
+Human * Human::clone(){
+    Human * clone = new Human(*name);
+    return clone;
+};
+
 
 
