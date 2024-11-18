@@ -17,9 +17,6 @@ int main(){
 
     add(toAdd, 5);
 
-    // transform the vector
-
-
-
+    // transform the vector with the increment functor
 
 }

@@ -33,7 +33,7 @@ public:
      *
      * @param True if the vehicle os moved successfully, false otherwise.
      */
-    bool move();
+    bool move() throws std::runtime_error ;
 
     /**
      * @brief Stops the vehicle.
