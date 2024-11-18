@@ -17,12 +17,13 @@ int main(){
      //generates a bumch of random cars and car parks and garages and humans and traucks and runs the simulation
     for (int i = 0; i < 100; ++i) {
         // Create random cars
-        car = new Car(generateRandomLicensePlate());
+        char* licensePlate = generateRandomLicensePlate();
+        car = new Car(licensePlate);
         town->addCar(car);
-        // another car
 
+        licensePlate = generateRandomLicensePlate();
         // Create random trucks
-        truck = new Truck(generateRandomLicensePlate());
+        truck = new Truck(licensePlate);
         town->addTruck(truck);
 
         // Create random humans
