@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <iostream>
 
+
+
 /**
  * @brief Represents a garage that can store cars and trucks.
  */

@@ -10,6 +10,8 @@
 #include <iostream>
 #include "CarPark.h"
 
+#include "../Location.h"
+
 /**
  * @brief Generates a random license plate consisting of 3 letters followed by 3 digits.
  * 

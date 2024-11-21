@@ -38,16 +38,19 @@ Truck* Garage::takeTruck(const std::string& licensePlate){
  std::vector<Vehicle*> Garage::listVehicles() const{
     std::vector <Car*> cars = this->cars;
     std::vector <Truck*> trucks = this->trucks;
+    Location * location;
 
     std::vector<Vehicle *> vehicles;
     for (Car* car : cars){
         std::cout << "Car: " << car->getLicensePlate() << std::endl;
-        vehicles.push_back(new Vehicle(car->getLicensePlate()));
+        location = new Location(car->getLocation().x, car->getLocation().y);
+        vehicles.push_back(new Vehicle(car->getLicensePlate(), *location));
         
     }
     for (Truck* truck : trucks){
         std::cout << "Truck: " << truck->getLicensePlate() << std::endl;
-        vehicles.push_back(new Vehicle(truck->getLicensePlate()));
+        location = new Location(truck->getLocation().x, truck->getLocation().y);
+        vehicles.push_back(new Vehicle(truck->getLicensePlate(), *location));
     }
 
     return vehicles;

@@ -58,10 +58,20 @@ Garage* Town::buildGarage(){
 
 
 
-void Town::run(){
-    while(true){
-        int action = rand() % 5;
-        switch(action){
+
+                
+#include "Town.h"
+#include <cstdlib>
+#include <ctime>
+#include <cmath>
+#include <iostream>
+
+void Town::run() {
+    srand(static_cast<unsigned int>(time(0))); // Seed for random number generation
+
+    while (true) {
+        int action = rand() % 9; // Increase the range to accommodate new actions
+        switch (action) {
             case 0:
                 moveRandomCar();
                 break;
@@ -80,16 +90,70 @@ void Town::run(){
             case 5:
                 cloneRandomHuman();
                 break;
-            case 6:
+            case 6: {
                 std::vector<Car*> cars = buildNRandomCars(2);
-                for (Car* car : cars){
+                for (Car* car : cars) {
                     addCar(car);
                 }
-                
+                break;
+            }
+            case 7:
+                moveRandomCarToRandomLocation();
+                break;
+            case 8:
+                moveRandomTruckToRandomLocation();
+                break;
+            case 9:
+                parkVehicleInNearestCarPark();
+                break;
+            case 10:
+                calculateDistanceBetweenRandomLocations();
+                break;
         }
     }
-};
+}
 
+void Town::moveRandomCarToRandomLocation() {
+    if (cars.size() > 0) {
+        int randomIndex = rand() % cars.size();
+        Car* car = cars[randomIndex];
+        Location newLocation = {static_cast<double>(rand() % 100), static_cast<double>(rand() % 100)};
+        car->setLocation(newLocation);
+        std::cout << "Moved car " << car->getLicensePlate() << " to new location (" << newLocation.x << ", " << newLocation.y << ")" << std::endl;
+    }
+}
+
+void Town::moveRandomTruckToRandomLocation() {
+    if (trucks.size() > 0) {
+        int randomIndex = rand() % trucks.size();
+        Truck* truck = trucks[randomIndex];
+        Location newLocation = {static_cast<double>(rand() % 100), static_cast<double>(rand() % 100)};
+        truck->setLocation(newLocation);
+        std::cout << "Moved truck " << truck->getLicensePlate() << " to new location (" << newLocation.x << ", " << newLocation.y << ")" << std::endl;
+    }
+}
+
+void Town::parkVehicleInNearestCarPark() {
+    if (cars.size() > 0 && carParks.size() > 0) {
+        int randomCarIndex = rand() % cars.size();
+        Car* car = cars[randomCarIndex];
+        Location carLocation = car->getLocation();
+        CarPark* nearestCarPark = findNearestAvailableCarPark(carParks, carLocation);
+        if (nearestCarPark != nullptr) {
+            nearestCarPark->addCar(car);
+            std::cout << "Parked car " << car->getLicensePlate() << " in nearest car park at location (" << nearestCarPark->getLocation().x << ", " << nearestCarPark->getLocation().y << ")" << std::endl;
+        } else {
+            std::cout << "No available car park found for car " << car->getLicensePlate() << std::endl;
+        }
+    }
+}
+
+void Town::calculateDistanceBetweenRandomLocations() {
+    Location loc1 = {static_cast<double>(rand() % 100), static_cast<double>(rand() % 100)};
+    Location loc2 = {static_cast<double>(rand() % 100), static_cast<double>(rand() % 100)};
+    double distance = calculateDistance(loc1, loc2);
+    std::cout << "Distance between (" << loc1.x << ", " << loc1.y << ") and (" << loc2.x << ", " << loc2.y << ") is " << distance << std::endl;
+}
 
 
 void Town::moveRandomCar(){

@@ -66,6 +66,15 @@ public:
     bool stop();
 
 
+        /**
+     * @brief Gets the total distance traveled by the car.
+     * @return The distance traveled by the car.
+     */
+    double getDistanceTraveled() const;
+
+    Location getLocation() const;
+
+
 
     ~Truck();
 

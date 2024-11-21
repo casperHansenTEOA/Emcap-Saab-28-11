@@ -39,7 +39,7 @@ void qs(std::vector<int>::iterator first, std::vector<int>::iterator last) {
 
 
 // brute force approach (Långsam)
-class Solution {
+class SolutionBad {
 public:
     std::vector<int> twoSum(std::vector<int>& nums, int target) {
     for (int i = 0; i < nums.size(); i++) {

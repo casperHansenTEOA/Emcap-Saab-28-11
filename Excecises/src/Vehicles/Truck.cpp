@@ -1,6 +1,6 @@
 #include "Truck.h"
 
-Truck::Truck(const std::string& licensePlate) : vehicle(licensePlate) {
+Truck::Truck(const std::string& licensePlate) : vehicle(licensePlate, *new Location{0, 0}) {
     cargoWeights = new std::vector<double>(); // Dynamically allocate memory for cargo weights
 }
 
@@ -31,12 +31,24 @@ double Truck::getCurrentCargoLoad() const{
     return totalWeight;
 }
 
-bool Truck::move(){
-    return vehicle.move();
+bool Truck::move(Direction direction){
+    return vehicle.move(direction);
 }
 
 bool Truck::stop(){
     return vehicle.stop();
+}
+
+double Truck::getDistanceTraveled() const {
+    return vehicle.calculateDistance({0, 0}, vehicle.getLocation());
+}
+
+Location Truck::getLocation() const {
+    return vehicle.getLocation();
+}
+
+void Truck::setLocation(Location location) {
+    vehicle.setLocation(location);
 }
 
 

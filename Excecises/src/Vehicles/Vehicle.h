@@ -2,6 +2,8 @@
 #define VEHICLE_H
 
 #include <string>
+#include "../Location.h"
+#include "../Direction.h"
 
 class Vehicle {
 public:
@@ -10,7 +12,7 @@ public:
      * 
      * @param licensePlate The license plate of the vehicle.
      */
-    Vehicle(const std::string& licensePlate);
+    Vehicle(const std::string& licensePlate, Location& location);
 
     
     /**
@@ -30,10 +32,11 @@ public:
 
     /**
      * @brief Moves the vehicle.
+     * @param direction The direction in which the vehicle should move.
      *
-     * @param True if the vehicle os moved successfully, false otherwise.
+     * @return True if the vehicle os moved successfully, false otherwise.
      */
-    bool move() throws std::runtime_error ;
+    bool move(Direction direction); ;
 
     /**
      * @brief Stops the vehicle.
@@ -43,12 +46,21 @@ public:
     bool stop();
 
 
+    double calculateDistance(const Location& loc1, const Location& loc2) const;
+    double getDistanceTraveled() const;
+  
+    Location getLocation() const;
+    void setLocation(Location location);
+
+
     virtual ~Vehicle() = default; 
 
 
 private:
     std::string* licensePlate; ///< Pointer to the license plate string.
     bool moving;
+    Location* currentLocation;
+
 };
 
 #endif // VEHICLE_H

@@ -127,6 +127,11 @@ private:
     *
      */
      std::vector<Car * >buildNRandomCars(int n);
+
+    void moveRandomCarToRandomLocation();
+    void moveRandomTruckToRandomLocation();
+    void parkVehicleInNearestCarPark();
+    void calculateDistanceBetweenRandomLocations();
 };
 
 #endif // TOWN_H

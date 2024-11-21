@@ -51,10 +51,10 @@ public:
 
     /**
      * @brief Moves the truck.
-     *
+     *  @param direction The direction in which to move the truck.
      * @return True if the truck is moved successfully, false otherwise.
      */
-    bool move();
+    bool move( Direction direction);
 
 
     /**
@@ -64,6 +64,28 @@ public:
      */
 
     bool stop();
+
+        /**
+     * @brief Gets the total distance traveled by the car.
+     * @return The distance traveled by the car.
+     */
+    double getDistanceTraveled() const;
+
+    /**
+     * @brief Gets the current location of the truck.
+     * @return The current location of the truck.
+     */
+    Location getLocation() const;
+
+    /**
+    * @brief sets the location of the truck
+    *
+    * @param location The location of the truck.
+     */
+
+    void setLocation(Location location);
+
+
 
 
 private:

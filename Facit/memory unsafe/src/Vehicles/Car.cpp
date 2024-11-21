@@ -1,7 +1,9 @@
 #include "Car.h"
 
-Car::Car(const std::string& licensePlate) : vehicle(licensePlate) {
+Car::Car(const std::string& licensePlate) : vehicle(licensePlate, *new Location{0, 0}) {
     this->licensePlate = new std::string(licensePlate);
+    // this->vehicle = Vehicle(licensePlate, {0, 0});
+
 }
 
 Car::~Car(){
