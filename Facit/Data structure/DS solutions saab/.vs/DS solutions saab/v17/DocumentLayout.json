@@ -7,7 +7,7 @@
       "RelativeMoniker": "D:0:0:{CBC77603-3AFF-442F-A9F0-4B059FEA2843}|DS solutions saab.vcxproj|solutionrelative:DS solutions saab.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CBC77603-3AFF-442F-A9F0-4B059FEA2843}|DS solutions saab.vcxproj|C:\\PROGRAM FILES\\MICROSOFT VISUAL STUDIO\\2022\\COMMUNITY\\VC\\TOOLS\\MSVC\\14.40.33807\\INCLUDE\\XMEMORY||{3B902123-F8A7-4915-9F01-361F908088D0}|"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\xmemory||{3B902123-F8A7-4915-9F01-361F908088D0}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -29,8 +29,7 @@
               "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\xmemory",
               "ViewState": "AQIAAAoFAAAAAAAAAADwvxQFAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-11-27T10:27:43.602Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-27T10:27:43.602Z"
             },
             {
               "$type": "Document",
@@ -40,7 +39,7 @@
               "RelativeDocumentMoniker": "DS solutions saab.cpp",
               "ToolTip": "C:\\GitHub\\emcapSAAB\\Emcap-Saab-28-11\\Facit\\Data structure\\DS solutions saab\\DS solutions saab.cpp",
               "RelativeToolTip": "DS solutions saab.cpp",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABAAAAACAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABYAAAA/AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-11-27T10:26:41.262Z",
               "EditorCaption": ""
