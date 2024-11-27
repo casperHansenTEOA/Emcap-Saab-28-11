@@ -31,6 +31,17 @@ void qs(std::vector<int>::iterator first, std::vector<int>::iterator last) {
     qs(split, last);
 }
 
+// test code
+int main() {
+    std::vector<int> v = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5};
+    qs(v.begin(), v.end());
+    for (int i : v) {
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
+    return 0;
+}
+
 
 
 
@@ -56,8 +67,7 @@ public:
 
 // This approach optimizes the Two-Pass Hash Table Approach by only making one iteration through the array. 
 // During the iteration, we add each element’s index to a hash map and check if the complement already exists in the hash map.
-class Solution {
-public:
+
   std::vector<int> twoSum(std::vector<int>& nums, int target) {
     std::unordered_map<int, int> numMap;
 
@@ -70,8 +80,19 @@ public:
     }
     return {};
   }
-};
 
+
+// driver test main 
+int main() {
+
+    std::vector<int> v = {1, 2, 3, 4, 5};
+    std::vector<int> res = twoSum(v, 7);
+    for (int i : res) {
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
+    return 0;
+}
 
 // Givet ett antal staplar med bredd 1 i ett stapeldiagram mur många enheter vatten kan lagras mellan splana på ett sätt så att vattnet inte rinnerut (det är normal gravitation)
 

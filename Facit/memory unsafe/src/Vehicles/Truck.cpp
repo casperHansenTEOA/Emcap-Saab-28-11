@@ -31,8 +31,8 @@ double Truck::getCurrentCargoLoad() const{
     return totalWeight;
 }
 
-bool Truck::move(){
-    return vehicle.move();
+bool Truck::move(Direction direction){
+    return vehicle.move(direction);
 }
 
 bool Truck::stop(){
