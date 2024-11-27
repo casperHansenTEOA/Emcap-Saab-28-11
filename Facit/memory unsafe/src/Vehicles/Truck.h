@@ -54,7 +54,7 @@ public:
      *
      * @return True if the truck is moved successfully, false otherwise.
      */
-    bool move();
+    bool move(Direction direction);
 
 
     /**

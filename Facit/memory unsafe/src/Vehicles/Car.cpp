@@ -11,8 +11,8 @@ Car::~Car(){
     delete licensePlate;
 }
 
-bool Car::move(){
-    return vehicle.move();
+bool Car::move(Direction direction){
+    return vehicle.move(direction);
 }
 
 bool Car::stop(){

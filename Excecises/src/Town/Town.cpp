@@ -233,10 +233,12 @@ void Town::useRandomGarage(){
 };
 
 void Town::cloneRandomHuman(){
+    Human* human = new Human("Human" + std::to_string(humans.size()));
+   
     if (humans.size() > 0){
         int randomIndex = rand() % humans.size();
-        Human* human = humans[randomIndex];
-        Human* clone = human->clone();
-        humans.push_back(clone);
+        human = humans[randomIndex];
+        human = human->clone();
+        humans.push_back(human);
     }
 };

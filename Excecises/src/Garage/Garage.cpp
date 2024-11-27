@@ -7,10 +7,12 @@ Garage::Garage(){
 }
 
 void Garage::addCar(Car* car){
+        car->stop();
         cars.push_back(car);
 };
 
 void Garage::addTruck(Truck* truck){
+    truck->stop();
     trucks.push_back(truck);
 };
 
@@ -18,6 +20,8 @@ void Garage::addTruck(Truck* truck){
     for (Car* car : cars){
         if (car->getLicensePlate() == licensePlate){
             cars.erase(std::remove(cars.begin(), cars.end(), car), cars.end());
+            
+            car->move(Direction::North);
             return car;
         }
     }
@@ -28,6 +32,7 @@ Truck* Garage::takeTruck(const std::string& licensePlate){
     for (Truck* truck : trucks){
         if (truck->getLicensePlate() == licensePlate){
             trucks.erase(std::remove(trucks.begin(), trucks.end(), truck), trucks.end());
+            truck->move(Direction::North);
             return truck;
         }
     }

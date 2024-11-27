@@ -23,10 +23,10 @@ public:
 
     /**
      * @brief Moves the car.
-     *
+     * 
      * @return True if the car is moved successfully, false otherwise.
      */
-    bool move();
+    bool move(Direction direction);
 
 
     /**

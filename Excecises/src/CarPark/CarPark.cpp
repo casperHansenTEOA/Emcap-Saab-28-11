@@ -31,6 +31,7 @@ char* generateRandomLicensePlate(){
 
 bool CarPark::addCar(Car* car){
     if (currentCars < capacity){
+        car->stop();
         cars.push_back(car);
         currentCars++;
         return true;
@@ -41,6 +42,7 @@ bool CarPark::addCar(Car* car){
 
 bool CarPark::addTruck(Truck* truck){
     if (currentCars < capacity){
+        truck->stop();
         trucks.push_back(truck);
         currentCars++;
         return true;
@@ -51,7 +53,10 @@ bool CarPark::addTruck(Truck* truck){
 bool CarPark::removeCar(const std::string& licensePlate){
     for (auto it = cars.begin(); it != cars.end(); ++it){
         if ((*it)->getLicensePlate() == licensePlate){
+            Car *car = new Car(licensePlate);
+            car = *it;
             cars.erase(it);
+            car->move(Direction::North);
             currentCars--;
             return true;
         }
@@ -62,7 +67,10 @@ bool CarPark::removeCar(const std::string& licensePlate){
 bool CarPark::removeTruck(const std::string& licensePlate){
     for (auto it = trucks.begin(); it != trucks.end(); ++it){
         if ((*it)->getLicensePlate() == licensePlate){
+            Truck *truck = new Truck(licensePlate);
+            truck = *it;
             trucks.erase(it);
+            truck->move(Direction::North);
             currentCars--;
             return true;
         }

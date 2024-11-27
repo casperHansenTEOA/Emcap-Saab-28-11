@@ -28,7 +28,7 @@ int main(){
 
         // Create random garages that dont bleong to any human
         for (int j = 0; j < 10; ++j) {
-                Garage * garage = town->buildGarage();
+                Garage * garage = town->buildGarage(); //TODO memory leak this is not deleted and is not returned to the caller
                 town->addGarage(garage);
           
         }

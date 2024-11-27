@@ -169,10 +169,14 @@ void Town::useRandomGarage(){
 };
 
 void Town::cloneRandomHuman(){
+
+    Human* human = new Human("Human" + std::to_string(humans.size())); // here is where the memory leak starts
     if (humans.size() > 0){
         int randomIndex = rand() % humans.size();
-        Human* human = humans[randomIndex];
-        Human* clone = human->clone(); // this is not memory safe because it returns a pointer to a new object that is not deleted
-        humans.push_back(clone);
+        human = humans[randomIndex];
+        human = human->clone(); // this is not memory safe because it returns a pointer to a new object and just leaves the old reference behind
+        // the old reference is not deleted and the new reference is not returned to the caller this means that even if we delete the referece in the list 
+        // the object is still in memory
+        humans.push_back(human);
     }
 };

@@ -19,14 +19,6 @@
 char* generateRandomLicensePlate();
 
 /**
- * @brief Represents a geographical location with x and y coordinates.
- */
-struct Location {
-    double x; ///< The x-coordinate of the location.
-    double y; ///< The y-coordinate of the location.
-};
-
-/**
  * @brief Represents a car park with a specific location and capacity.
  */
 class CarPark {

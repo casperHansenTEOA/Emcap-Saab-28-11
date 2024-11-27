@@ -49,7 +49,10 @@ bool CarPark::addTruck(Truck* truck){
 bool CarPark::removeCar(const std::string& licensePlate){
     for (auto it = cars.begin(); it != cars.end(); ++it){
         if ((*it)->getLicensePlate() == licensePlate){
+            Car *car = new Car(licensePlate); // TODO memory leak
+            car = *it;
             cars.erase(it);
+            car->move(Direction::North);
             currentCars--;
             return true;
         }
@@ -60,7 +63,10 @@ bool CarPark::removeCar(const std::string& licensePlate){
 bool CarPark::removeTruck(const std::string& licensePlate){
     for (auto it = trucks.begin(); it != trucks.end(); ++it){
         if ((*it)->getLicensePlate() == licensePlate){
+            Truck *truck = new Truck(licensePlate); // TODO memory leak
+            truck = *it;
             trucks.erase(it);
+            truck->move(Direction::North);
             currentCars--;
             return true;
         }
