@@ -1,4 +1,5 @@
 #include "Truck.h"
+#include <algorithm>
 
 Truck::Truck(const std::string& licensePlate) : vehicle(licensePlate, *new Location{0, 0}) {
     cargoWeights = new std::vector<double>(); // Dynamically allocate memory for cargo weights

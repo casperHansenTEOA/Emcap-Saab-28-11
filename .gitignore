@@ -1,0 +1,86 @@
+# Compiled Object files
+*.o
+*.obj
+*.lo
+*.la
+*.slo
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Build directories
+[Bb]uild/
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build-*/
+*-build/
+
+# CMake files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
+
+# Visual Studio and VS Code
+.vs/
+*.suo
+*.user
+*.vcxproj.user
+*.vcxproj.filters
+ipch/
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.tlog
+*.log
+*.ilk
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.db
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/c_cpp_properties.json
+
+# CLion
+.idea/
+
+# Qt Creator
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+
+# Eclipse
+.cproject
+.project
+.settings/
+
+# Other
+*.stackdump
+*.dmp

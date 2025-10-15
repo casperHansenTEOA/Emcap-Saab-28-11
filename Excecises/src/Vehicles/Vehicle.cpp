@@ -1,4 +1,5 @@
 #include "Vehicle.h" 
+#include <cmath>
 
 // turn a direction into a location
 Location directionToLocation(Direction direction){

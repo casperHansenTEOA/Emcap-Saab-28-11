@@ -8,9 +8,13 @@
  */
 
 #include <iostream>
+#include <limits>
 #include "CarPark.h"
 
 #include "../Location.h"
+
+CarPark::CarPark(const Location& location, int capacity)
+    : location(location), capacity(capacity), currentCars(0) {}
 
 /**
  * @brief Generates a random license plate consisting of 3 letters followed by 3 digits.
@@ -18,13 +22,14 @@
  * @return A randomly generated license plate.
  */
 char* generateRandomLicensePlate(){
-    char* licensePlate = "";
+    char* licensePlate = new char[7];
     for (int i = 0; i < 3; ++i){
-        licensePlate += 'A' + rand() % 26;
+        licensePlate[i] = static_cast<char>('A' + rand() % 26);
     }
     for (int i = 0; i < 3; ++i){
-        licensePlate += '0' + rand() % 10;
+        licensePlate[3 + i] = static_cast<char>('0' + rand() % 10);
     }
+    licensePlate[6] = '\0';
     return licensePlate;
 };
 
@@ -102,9 +107,21 @@ std::string CarPark::getCarOfHuman(const std::string& humanName){
 };
 
 
-const Location& CarPark::getLocation(){
+const Location& CarPark::getLocation() const{
     return location;
 };
+
+int CarPark::getCapacity() const {
+    return capacity;
+}
+
+int CarPark::getCurrentLoad() const {
+    return currentCars;
+}
+
+bool CarPark::hasSpace() const {
+    return currentCars < capacity;
+}
 
 
 
@@ -119,7 +136,7 @@ CarPark* findNearestAvailableCarPark(const std::vector<CarPark*>& carParks, cons
     double minDistance = std::numeric_limits<double>::max();
     for (CarPark* carPark : carParks){
         double distance = calculateDistance(currentLocation, carPark->getLocation());
-        if (distance < minDistance && carPark->addCar(new Car(generateRandomLicensePlate()))){
+        if (distance < minDistance && carPark->hasSpace()){
             minDistance = distance;
             nearestCarPark = carPark;
         }

@@ -3,6 +3,7 @@
 
 #include "../CarPark/CarPark.h"
 #include <vector>
+#include <cstddef>
 
 /**
  * @brief Represents a town that manages cars, trucks, humans, garages, and car parks.
@@ -86,6 +87,13 @@ public:
      * @brief Runs the simulation for a specified number of time steps, performing random actions.
      */
     void run();
+
+    /**
+     * @brief Prints a snapshot of the town for the given rotation.
+     *
+     * @param rotation Sequential number of the simulation step.
+     */
+    void printState(std::size_t rotation) const;
 
 private:
     std::vector<CarPark*> carParks; ///< Vector of pointers to car parks in the town.

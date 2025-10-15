@@ -63,14 +63,19 @@ Garage* Town::buildGarage(){
 #include "Town.h"
 #include <cstdlib>
 #include <ctime>
-#include <cmath>
 #include <iostream>
+#include <algorithm>
+#include <chrono>
+#include <thread>
+#include "../MemoryTracker.h"
 
 void Town::run() {
     srand(static_cast<unsigned int>(time(0))); // Seed for random number generation
 
+    std::size_t rotation = 0;
+    MemoryTracker::logRotation(rotation);
     while (true) {
-        int action = rand() % 9; // Increase the range to accommodate new actions
+        int action = rand() % 11; // Increase the range to accommodate new actions
         switch (action) {
             case 0:
                 moveRandomCar();
@@ -110,6 +115,12 @@ void Town::run() {
                 calculateDistanceBetweenRandomLocations();
                 break;
         }
+
+    printState(rotation);
+    MemoryTracker::logRotation(rotation);
+        ++rotation;
+        // sleep for a short duration to simulate time passing
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
 }
 
@@ -242,3 +253,59 @@ void Town::cloneRandomHuman(){
         humans.push_back(human);
     }
 };
+
+void Town::printState(std::size_t rotation) const {
+    constexpr std::size_t previewCount = 3;
+    std::cout << "\n=== Town state after rotation " << rotation << " ===\n";
+    std::cout << "Humans: " << humans.size()
+              << ", Cars: " << cars.size()
+              << ", Trucks: " << trucks.size()
+              << ", Garages: " << garages.size()
+              << ", Car parks: " << carParks.size() << '\n';
+
+    if (!humans.empty()) {
+        std::cout << "  Sample humans:";
+        for (std::size_t i = 0; i < std::min(previewCount, humans.size()); ++i) {
+            std::cout << " " << humans[i]->getName();
+        }
+        if (humans.size() > previewCount) {
+            std::cout << " ...";
+        }
+        std::cout << '\n';
+    }
+
+    if (!cars.empty()) {
+        std::cout << "  Sample cars:" << '\n';
+        for (std::size_t i = 0; i < std::min(previewCount, cars.size()); ++i) {
+            Car* car = cars[i];
+            Location loc = car->getLocation();
+            std::cout << "    #" << (i + 1) << " " << car->getLicensePlate()
+                      << " @ (" << loc.x << ", " << loc.y << ")" << '\n';
+        }
+    }
+
+    if (!trucks.empty()) {
+        std::cout << "  Sample trucks:" << '\n';
+        for (std::size_t i = 0; i < std::min(previewCount, trucks.size()); ++i) {
+            Truck* truck = trucks[i];
+            Location loc = truck->getLocation();
+            std::cout << "    #" << (i + 1) << " " << truck->getLicensePlate()
+                      << " @ (" << loc.x << ", " << loc.y << ")" << '\n';
+        }
+    }
+
+    if (!carParks.empty()) {
+        std::cout << "  Car parks: " << '\n';
+        for (std::size_t i = 0; i < std::min(previewCount, carParks.size()); ++i) {
+            const CarPark* carPark = carParks[i];
+            const Location& loc = carPark->getLocation();
+            std::cout << "    #" << (i + 1) << " capacity " << carPark->getCapacity()
+                      << " load " << carPark->getCurrentLoad()
+                      << " @ (" << loc.x << ", " << loc.y << ")" << '\n';
+        }
+        if (carParks.size() > previewCount) {
+            std::cout << "    ..." << '\n';
+        }
+    }
+    std::cout.flush();
+}

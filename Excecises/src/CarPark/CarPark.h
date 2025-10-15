@@ -98,7 +98,22 @@ public:
      * 
      * @return The location of the car park.
      */
-    const Location& getLocation();
+    const Location& getLocation() const;
+
+    /**
+     * @brief Gets the total capacity of the car park.
+     */
+    int getCapacity() const;
+
+    /**
+     * @brief Gets the number of vehicles currently parked.
+     */
+    int getCurrentLoad() const;
+
+    /**
+     * @brief Checks if the car park has space for more vehicles.
+     */
+    bool hasSpace() const;
 
 private:
     Location location; ///< The location of the car park.

@@ -1,4 +1,5 @@
 #include "Town/Town.h"
+#include "MemoryTracker.h"
 #include <vector>
 
 /**
@@ -7,6 +8,7 @@
  * @return Exit status of the program.
  */
 int main(){
+    MemoryTracker::initialize("memory_log.csv");
    //all the things that go in a town
     Car* car;
     Truck* truck;
