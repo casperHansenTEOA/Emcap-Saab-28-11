@@ -10,17 +10,23 @@
 int main(){
     MemoryTracker::initialize("../../memory_log.csv");
    //all the things that go in a town
+
+   // onödiga pekare
     Car* car;
     Truck* truck;
     Garage* garage;
     CarPark* carPark;
     Human* human;
+
+    // denna behöver inte vara på heapen enbart stacken
     Town * town = new Town(); 
      //generates a bumch of random cars and car parks and garages and humans and traucks and runs the simulation
     for (int i = 0; i < 100; ++i) {
         // Create random cars
         char* licensePlate = generateRandomLicensePlate();
-        car = new Car(licensePlate);
+
+        car = new Car(licensePlate); 
+
         town->addCar(car);
 
         licensePlate = generateRandomLicensePlate();

@@ -58,6 +58,7 @@ bool CarPark::addTruck(Truck* truck){
 bool CarPark::removeCar(const std::string& licensePlate){
     for (auto it = cars.begin(); it != cars.end(); ++it){
         if ((*it)->getLicensePlate() == licensePlate){
+            // throwaway new  here which is a memory leak
             Car *car = new Car(licensePlate);
             car = *it;
             cars.erase(it);
@@ -73,6 +74,7 @@ bool CarPark::removeTruck(const std::string& licensePlate){
     for (auto it = trucks.begin(); it != trucks.end(); ++it){
         if ((*it)->getLicensePlate() == licensePlate){
             Truck *truck = new Truck(licensePlate);
+            // throwaway new  here which is a memory leak
             truck = *it;
             trucks.erase(it);
             truck->move(Direction::North);
