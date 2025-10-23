@@ -42,7 +42,7 @@ int main(){
 
         // make every other human own the same garage  seems like town and humans need to share garages as well
         if (i % 2 == 0) {
-            std::shared_ptr<Garage> garage = std::make_shared<Garage>();
+             garage = std::make_shared<Garage>();
             
         }
         human->addGarage(garage);
