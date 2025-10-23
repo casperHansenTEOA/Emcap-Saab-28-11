@@ -1,3 +1,4 @@
+#include "Garage/Garage.h"
 #include "Town/Town.h"
 #include "MemoryTracker.h"
 #include <vector>
@@ -12,7 +13,7 @@ int main(){
    //all the things that go in a town
     Car* car;
     Truck* truck;
-    Garage* garage;
+    Garage* garage = new Garage();
     CarPark* carPark;
     Human* human;
     Town * town = new Town(); 
@@ -35,10 +36,10 @@ int main(){
         // make every other human own the same garage
         if (i % 2 == 0) {
             garage = new Garage();
+       
+        }
             human->addGarage(garage);
             town->addGarage(garage);
-        }
-
         // Create random garages that dont belong to any human
         for (int j = 0; j < 10; ++j) {
                garage = town->buildGarage();
