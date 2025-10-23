@@ -18,6 +18,8 @@ int main(){
     // CarPark* carPark;
     // Human* human;
 
+     std::shared_ptr<Garage> garage;
+
     // denna behöver inte vara på heapen enbart stacken
     Town  town = Town(); 
      //generates a bumch of random cars and car parks and garages and humans and traucks and runs the simulation
@@ -38,16 +40,17 @@ int main(){
         Human* human = new Human("Human" + std::to_string(i));
         town.addHuman(human);
 
-        // make every other human own the same garage
+        // make every other human own the same garage  seems like town and humans need to share garages as well
         if (i % 2 == 0) {
-            garage = new Garage();
-            human->addGarage(garage);
-            town->addGarage(garage);
+            std::shared_ptr<Garage> garage = std::make_shared<Garage>();
+            
         }
+        human->addGarage(garage);
+        town.addGarage(garage);
 
         // Create random garages that dont belong to any human
         for (int j = 0; j < 10; ++j) {
-               Garage* garage = town.buildGarage();
+               std::shared_ptr<Garage> garage = town.buildGarage();
                 town.addGarage(garage);
           
         }

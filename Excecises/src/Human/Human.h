@@ -2,6 +2,7 @@
 #define HUMAN_H
 
 #include "../Garage/Garage.h"
+#include <memory>
 /**
  * @brief Represents a human who owns a garage and can purchase vehicles.
  */
@@ -20,7 +21,7 @@ public:
      * 
      * @param garage Pointer to the garage to be added. IMPORTANT that this is a pointer since humans can share garages
      */
-    void addGarage(Garage* garage);
+    void addGarage(std::shared_ptr<Garage> garage);
 
     /**
      * @brief Purchases a car with the given license plate and adds it to the human's garage.
@@ -41,14 +42,16 @@ public:
      * @brief Adds a car to the human's garage.
      * 
      * @param car Pointer to the car to be added.
+
+     // cars and trucks are unique as they can only be in one garage at a time
      */
-    void addCarToGarage(Car* car);
+    void addCarToGarage(std::unique_ptr<Car> car);
     /**
      * @brief Adds a truck to the human's garage.
      * 
      * @param truck Pointer to the truck to be added.
      */
-    void addTruckToGarage(Truck* truck);
+    void addTruckToGarage(std::unique_ptr<Truck> truck);
 
     /**
      * @brief Takes a car from the human's garage based on the license plate.
@@ -56,14 +59,14 @@ public:
      * @param licensePlate The license plate of the car to be taken.
      * @return Pointer to the car if found, nullptr otherwise.
      */
-    Car* takeCarFromGarage(const std::string& licensePlate);
+    Car* takeCarFromGarage(const std::string licensePlate);
     /**
      * @brief Takes a truck from the human's garage based on the license plate.
      * 
      * @param licensePlate The license plate of the truck to be taken.
      * @return Pointer to the truck if found, nullptr otherwise.
      */
-    Truck* takeTruckFromGarage(const std::string& licensePlate);
+    Truck* takeTruckFromGarage(const std::string licensePlate);
 
     /**
      * @brief Lists all vehicles currently owned by the human.
@@ -86,6 +89,6 @@ public:
 
 private:
     std::string name; ///< The name of the human.
-    Garage* garage; ///< Pointer to the garage owned by the human.
+    std::shared_ptr<Garage> garage; ///< Pointer to the garage owned by the human this can be shared between humans and town 
 };
 #endif  // HUMAN_H

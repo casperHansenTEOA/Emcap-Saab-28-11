@@ -3,6 +3,7 @@
 
 #include "../Vehicles/Car.h"
 #include "../Vehicles/Truck.h"
+#include <memory>
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -23,14 +24,14 @@ public:
      * 
      * @param car Pointer to the car to be added.
      */
-    void addCar(Car* car);
+    void addCar(std::unique_ptr<Car> car);
 
     /**
      * @brief Adds a truck to the garage.
      * 
      * @param truck Pointer to the truck to be added.
      */
-    void addTruck(Truck* truck);
+    void addTruck(std::unique_ptr<Truck> truck);
     /**
      * @brief Takes a car from the garage based on the license plate.
      * 
@@ -52,7 +53,7 @@ public:
     std::vector<Vehicle *> listVehicles() const;
 
 private:
-    std::vector<Car*> cars; ///< Vector of pointers to cars in the garage.
-    std::vector<Truck*> trucks; ///< Vector of pointers to trucks in the garage.
+    std::vector<std::unique_ptr<Car>> cars; ///< Vector of unique pointers to cars in the garage.
+    std::vector<std::unique_ptr<Truck>> trucks; ///< Vector of unique pointers to trucks in the garage.
 };
 #endif // GARAGE_H

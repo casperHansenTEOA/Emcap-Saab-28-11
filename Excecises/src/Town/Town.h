@@ -100,7 +100,7 @@ private:
     std::vector<Car*> cars; ///< Vector of pointers to cars in the town.
     std::vector<Human*> humans; ///< Vector of pointers to humans in the town.
     std::vector<Truck*> trucks; ///< Vector of pointers to trucks in the town.
-    std::vector<Garage*> garages; ///< Vector of pointers to garages in the town.
+    std::vector<std::shared_ptr<Garage>> garages; ///< Vector of pointers to garages in the town. (shared with humans)
 
     /**
      * @brief Moves a random car in the town.
@@ -134,7 +134,7 @@ private:
     * @birief builds n random cars
     *
      */
-     std::vector<Car * >buildNRandomCars(int n);
+     std::vector<std::unique_ptr<Car>> buildNRandomCars(int n);
 
     void moveRandomCarToRandomLocation();
     void moveRandomTruckToRandomLocation();

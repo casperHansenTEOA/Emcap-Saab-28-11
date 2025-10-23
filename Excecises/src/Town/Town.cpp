@@ -21,7 +21,7 @@ void Town::addTruck(Truck* truck){
 };
 
 
-void Town::addGarage(Garage* garage){
+void Town::addGarage(std::shared_ptr<Garage> garage){
     garages.push_back(garage);
 };
 
