@@ -16,6 +16,13 @@ public:
 
 
     /**
+     * @brief Adds a garage to the human's collection of garages.
+     * 
+     * @param garage Pointer to the garage to be added. IMPORTANT that this is a pointer since humans can share garages
+     */
+    void addGarage(Garage* garage);
+
+    /**
      * @brief Purchases a car with the given license plate and adds it to the human's garage.
      * 
      * @param licensePlate The license plate of the car to be purchased.

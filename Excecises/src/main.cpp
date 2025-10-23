@@ -32,7 +32,14 @@ int main(){
         human = new Human("Human" + std::to_string(i));
         town->addHuman(human);
 
-        // Create random garages that dont bleong to any human
+        // make every other human own the same garage
+        if (i % 2 == 0) {
+            garage = new Garage();
+            human->addGarage(garage);
+            town->addGarage(garage);
+        }
+
+        // Create random garages that dont belong to any human
         for (int j = 0; j < 10; ++j) {
                garage = town->buildGarage();
                 town->addGarage(garage);

@@ -5,7 +5,9 @@ Human::Human(const std::string& name){
 };
 
 
-
+void Human::addGarage(Garage* garage){
+    this->garage = garage;
+};
 void Human::purchaseCar(const std::string& licensePlate){
     Car* car = new Car(licensePlate);
     addCarToGarage(car);
