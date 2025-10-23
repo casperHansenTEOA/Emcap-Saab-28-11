@@ -1,6 +1,6 @@
 #include "Human.h"
-Human::Human(const std::string& name){
-    this->name = new std::string(name);
+Human::Human(const std::string name){
+    this->name = std::string(name);
     garage = new Garage();
 };
 

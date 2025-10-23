@@ -12,7 +12,7 @@ public:
      * 
      * @param name The name of the human.
      */
-    Human(const std::string& name);
+    Human(const std::string name);
 
 
     /**
@@ -20,7 +20,7 @@ public:
      * 
      * @param licensePlate The license plate of the car to be purchased.
      */
-    void purchaseCar(const std::string& licensePlate);
+    void purchaseCar(const std::string licensePlate);
     
 
     /**
@@ -28,7 +28,7 @@ public:
      * 
      * @param licensePlate The license plate of the truck to be purchased.
      */
-    void purchaseTruck(const std::string& licensePlate);
+    void purchaseTruck(const std::string licensePlate);
 
     /**
      * @brief Adds a car to the human's garage.
@@ -78,7 +78,7 @@ public:
     Human* clone();
 
 private:
-    std::string* name; ///< Pointer to the name string.
+    std::string name; ///< The name of the human.
     Garage* garage; ///< Pointer to the garage owned by the human.
 };
 #endif  // HUMAN_H

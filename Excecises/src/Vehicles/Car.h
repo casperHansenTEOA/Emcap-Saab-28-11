@@ -17,7 +17,7 @@ public:
      * @brief Constructs a Car object with the given license plate.
      * @param licensePlate The license plate of the car.
      */
-    Car(const std::string& licensePlate);
+    Car(const std::string licensePlate);
 
     /**
      * @brief Destroys the Car object.
@@ -63,7 +63,7 @@ public:
     void setLocation(Location location);
 
 private:
-    std::string* licensePlate; ///< The license plate of the car.
+    std::string licensePlate; ///< The license plate of the car.
 
     Vehicle vehicle; ///< The vehicle associated with the car.
 };

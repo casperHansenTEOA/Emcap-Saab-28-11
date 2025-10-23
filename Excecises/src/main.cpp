@@ -12,57 +12,59 @@ int main(){
    //all the things that go in a town
 
    // onödiga pekare
-    Car* car;
-    Truck* truck;
-    Garage* garage;
-    CarPark* carPark;
-    Human* human;
+    // Car* car;
+    // Truck* truck;
+    // Garage* garage;
+    // CarPark* carPark;
+    // Human* human;
 
     // denna behöver inte vara på heapen enbart stacken
-    Town * town = new Town(); 
+    Town  town = Town(); 
      //generates a bumch of random cars and car parks and garages and humans and traucks and runs the simulation
     for (int i = 0; i < 100; ++i) {
         // Create random cars
         char* licensePlate = generateRandomLicensePlate();
 
-        car = new Car(licensePlate); 
+        Car* car = new Car(licensePlate);  // changed to in scope 
 
-        town->addCar(car);
+        town.addCar(car); // change from arrows to dots since town is not a pointer now
 
         licensePlate = generateRandomLicensePlate();
         // Create random trucks
-        truck = new Truck(licensePlate);
-        town->addTruck(truck);
+        Truck* truck = new Truck(licensePlate);
+        town.addTruck(truck);
 
         // Create random humans
-        human = new Human("Human" + std::to_string(i));
-        town->addHuman(human);
+        Human* human = new Human("Human" + std::to_string(i));
+        town.addHuman(human);
 
         // Create random garages that dont bleong to any human
         for (int j = 0; j < 10; ++j) {
-               garage = town->buildGarage();
-                town->addGarage(garage);
+               Garage* garage = town.buildGarage();
+                town.addGarage(garage);
           
         }
 
         // Create random car parks
         Location location = {static_cast<double>(rand() % 100), static_cast<double>(rand() % 100)};
-        carPark = new CarPark(location, rand() % 50 + 1);
-        town->addCarPark(carPark);
-         // Human purchases a car and a truck
+        CarPark* carPark = new CarPark(location, rand() % 50 + 1);
+        town.addCarPark(carPark);
+        // Human purchases a car and a truck
         human->purchaseCar(car->getLicensePlate());
         human->purchaseTruck(truck->getLicensePlate());
         // Human lists owned vehicles
-        human->listOwnedVehicles();   
+        human->listOwnedVehicles();
     }
-    delete car;
-    delete truck;
-    delete garage;
-    delete carPark;
-    delete human;
+
+    // no more deletes needed
+    // delete car;
+    // delete truck;
+    // delete garage;
+    // delete carPark;
+    // delete human;
 
 
-    town->run();
+    town.run();
     return 0;
 
 };

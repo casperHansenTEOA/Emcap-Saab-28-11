@@ -12,7 +12,7 @@ public:
      * 
      * @param licensePlate The license plate of the vehicle.
      */
-    Vehicle(const std::string& licensePlate, Location& location);
+    Vehicle(std::string licensePlate, Location location);
 
     
     /**
@@ -57,9 +57,9 @@ public:
 
 
 private:
-    std::string* licensePlate; ///< Pointer to the license plate string.
+    std::string licensePlate; ///< Pointer to the license plate string.
     bool moving;
-    Location* currentLocation;
+    Location currentLocation;
 
 };
 

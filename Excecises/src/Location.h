@@ -11,8 +11,8 @@ public:
      * @param loc2 The second location.
      * @return The sum of the two locations.
      */
-    Location * add(const Location& loc1, const Location& loc2){
-        return new Location (loc1.x + loc2.x, loc1.y + loc2.y);
+    Location  add(const Location& loc1, const Location& loc2){
+        return Location (loc1.x + loc2.x, loc1.y + loc2.y);
     };
 
     Location(double x, double y) : x(x), y(y) {}

@@ -1,13 +1,15 @@
 #include "Car.h"
 
-Car::Car(const std::string& licensePlate) : vehicle(licensePlate, *new Location{0, 0}) {
-    this->licensePlate = new std::string(licensePlate);
+
+// removed all the stupid pointers
+Car::Car(const std::string licensePlate) : vehicle(licensePlate,  Location{0, 0}) {
+    this->licensePlate = std::string(licensePlate);
     // this->vehicle = Vehicle(licensePlate, {0, 0});
 
 }
 
 Car::~Car(){
-    delete licensePlate;
+    
 }
 
 bool Car::move(Direction direction){

@@ -90,6 +90,6 @@ public:
 
 private:
     Vehicle vehicle; ///< The vehicle object representing the truck.
-    std::vector<double>* cargoWeights; ///< Pointer to a vector of cargo weights.
+    std::vector<double> cargoWeights; ///< Vector of cargo weights. ((removed pointer ))
 };
 #endif // TRUCK_H

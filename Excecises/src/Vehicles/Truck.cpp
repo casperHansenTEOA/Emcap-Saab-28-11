@@ -1,8 +1,9 @@
 #include "Truck.h"
 #include <algorithm>
 
-Truck::Truck(const std::string& licensePlate) : vehicle(licensePlate, *new Location{0, 0}) {
-    cargoWeights = new std::vector<double>(); // Dynamically allocate memory for cargo weights
+// renoved unnessicary location pointer 
+Truck::Truck(const std::string& licensePlate) : vehicle(licensePlate, Location{0, 0}) {
+    cargoWeights = std::vector<double>(); // Dynamically allocate memory for cargo weights (( removed new ))
 }
 
 std::string Truck::getLicensePlate(){
@@ -10,15 +11,15 @@ std::string Truck::getLicensePlate(){
 }
 
 bool Truck::loadCargo(double weight){
-    cargoWeights->push_back(weight); // Add weight to cargo weights
+    cargoWeights.push_back(weight); // Add weight to cargo weights
     return true;
 }
 
 bool Truck::unloadCargo(double weight){
     // Simulate unloading cargo by removing weight from cargo weights
-    auto it = std::find(cargoWeights->begin(), cargoWeights->end(), weight);
-    if (it != cargoWeights->end()) {
-        cargoWeights->erase(it);
+    auto it = std::find(cargoWeights.begin(), cargoWeights.end(), weight);
+    if (it != cargoWeights.end()) {
+        cargoWeights.erase(it);
         return true;
     }
     return false;
@@ -26,7 +27,7 @@ bool Truck::unloadCargo(double weight){
 
 double Truck::getCurrentCargoLoad() const{
     double totalWeight = 0.0;
-    for (double weight : *cargoWeights) {
+    for (double weight : cargoWeights) {
         totalWeight += weight;
     }
     return totalWeight;

@@ -16,14 +16,16 @@ Location directionToLocation(Direction direction){
     return {0, 0};
 };
 
-Vehicle::Vehicle(const std::string& licensePlate, Location& location)
+
+// no need for license plate to be a pointer same with location tbh
+// used default constructing instead
+Vehicle::Vehicle( std::string licensePlate, Location location): licensePlate(licensePlate), moving(false), currentLocation(location)
 {
-    this->licensePlate = new std::string(licensePlate);
-    this->currentLocation = &location;
+
 };
 
 std::string Vehicle::getLicensePlate() const{
-    return *licensePlate;
+    return licensePlate;
 };
 
 
@@ -35,7 +37,7 @@ bool Vehicle::move(Direction direction){
     if(moving){
         return false;
     }
-    currentLocation = currentLocation->add(*this->currentLocation, directionToLocation(direction));
+    currentLocation = currentLocation.add(this->currentLocation, directionToLocation(direction));
     moving = true;
     return true;
 };
@@ -53,15 +55,15 @@ double Vehicle::calculateDistance(const Location& loc1, const Location& loc2) co
 };
 
 double Vehicle::getDistanceTraveled() const{
-    return calculateDistance({0, 0}, *currentLocation);
+    return calculateDistance({0, 0}, currentLocation);
 };
 
 Location Vehicle::getLocation() const{
-    return *currentLocation;
+    return currentLocation;
 };
 
 void Vehicle::setLocation( Location location){
-    this->currentLocation = &location;
+    this->currentLocation = location;
 };
 
 
