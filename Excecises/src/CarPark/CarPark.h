@@ -1,5 +1,6 @@
 #ifndef CARPARK_H
 #define CARPARK_H
+#include <memory>
 #include <unordered_map>
 #include <string>
 #include <vector>
@@ -16,7 +17,7 @@
  * 
  * @return A randomly generated license plate.
  */
-char* generateRandomLicensePlate();
+const char* generateRandomLicensePlate();
 
 
 
@@ -40,7 +41,7 @@ public:
      * @param car Pointer to the car to be added.
      * @return True if the car was added, false otherwise.
      */
-    bool addCar(Car* car);
+    bool addCar(std::unique_ptr<Car> car);
 
     /**
      * @brief Adds a truck to the car park if there is space available.
@@ -48,7 +49,7 @@ public:
      * @param truck Pointer to the truck to be added.
      * @return True if the truck was added, false otherwise.
      */
-    bool addTruck(Truck* truck);
+    bool addTruck(std::unique_ptr<Truck> truck);
 
     /**
      * @brief Removes a car from the car park based on the license plate.
@@ -56,7 +57,7 @@ public:
      * @param licensePlate The license plate of the car to be removed.
      * @return True if the car was removed, false otherwise.
      */
-    bool removeCar(const std::string& licensePlate);
+    bool removeCar(const std::string licensePlate);
 
     /**
      * @brief Removes a truck from the car park based on the license plate.
@@ -64,7 +65,7 @@ public:
      * @param licensePlate The license plate of the truck to be removed.
      * @return True if the truck was removed, false otherwise.
      */
-    bool removeTruck(const std::string& licensePlate);
+    bool removeTruck(const std::string licensePlate);
 
     /**
      * @brief Parking a vehicle in the car park.
@@ -73,7 +74,7 @@ public:
      * @return True if the vehicle was parked, false otherwise.
      */
 
-    bool parkVehicle(Vehicle* vehicle);
+    bool parkVehicle(std::unique_ptr<Vehicle> vehicle);
 
 
 
@@ -83,7 +84,7 @@ public:
      * @param humanName The name of the human.
      * @param licensePlate The license plate of the car.
      */
-    void assignCarToHuman(const std::string& humanName, const std::string& licensePlate);
+    void assignCarToHuman(const std::string humanName, const std::string licensePlate);
 
     /**
      * @brief Gets the license plate of the car assigned to a human based on the human's name.
@@ -119,8 +120,8 @@ private:
     Location location; ///< The location of the car park.
     int capacity; ///< The maximum number of vehicles the car park can hold.
     int currentCars; ///< The current number of vehicles in the car park.
-    std::vector<Car*> cars; ///< Vector of pointers to cars in the car park.
-    std::vector<Truck*> trucks; ///< Vector of pointers to trucks in the car park.
+    std::vector<std::unique_ptr<Car>> cars; ///< Vector of pointers to cars in the car park.
+    std::vector<std::unique_ptr<Truck>> trucks; ///< Vector of pointers to trucks in the car park.
     std::unordered_map<std::string, std::string> humanCarMap; ///< Map of human names to car license plates.
 };
 
@@ -139,6 +140,6 @@ double calculateDistance(const Location& loc1, const Location& loc2);
  * @param currentLocation The current location.
  * @return Pointer to the nearest available car park, or nullptr if no car park is available.
  */
-CarPark* findNearestAvailableCarPark(const std::vector<CarPark*>& carParks, const Location& currentLocation);
+std::unique_ptr<CarPark> findNearestAvailableCarPark(const std::vector<std::unique_ptr<CarPark>>& carParks, const Location& currentLocation);
 
 #endif // CARPARK_H

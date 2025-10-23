@@ -1,5 +1,6 @@
 #include "Town/Town.h"
 #include "MemoryTracker.h"
+#include <memory>
 #include <vector>
 
 /**
@@ -25,20 +26,20 @@ int main(){
      //generates a bumch of random cars and car parks and garages and humans and traucks and runs the simulation
     for (int i = 0; i < 100; ++i) {
         // Create random cars
-        char* licensePlate = generateRandomLicensePlate();
+        const char* licensePlate = generateRandomLicensePlate();
 
-        Car* car = new Car(licensePlate);  // changed to in scope 
+        std::unique_ptr<Car> car = std::make_unique<Car>(licensePlate);
 
-        town.addCar(car); // change from arrows to dots since town is not a pointer now
+        town.addCar(std::move(car));
 
         licensePlate = generateRandomLicensePlate();
         // Create random trucks
-        Truck* truck = new Truck(licensePlate);
-        town.addTruck(truck);
+        std::unique_ptr<Truck> truck = std::make_unique<Truck>(licensePlate);
+        town.addTruck(std::move(truck));
 
         // Create random humans
-        Human* human = new Human("Human" + std::to_string(i));
-        town.addHuman(human);
+        std::unique_ptr<Human> human = std::make_unique<Human>("Human" + std::to_string(i));
+        town.addHuman(std::move(human));
 
         // make every other human own the same garage  seems like town and humans need to share garages as well
         if (i % 2 == 0) {
@@ -57,8 +58,8 @@ int main(){
 
         // Create random car parks
         Location location = {static_cast<double>(rand() % 100), static_cast<double>(rand() % 100)};
-        CarPark* carPark = new CarPark(location, rand() % 50 + 1);
-        town.addCarPark(carPark);
+        std::unique_ptr<CarPark> carPark = std::make_unique<CarPark>(location, rand() % 50 + 1);
+        town.addCarPark(std::move(carPark));
         // Human purchases a car and a truck
         human->purchaseCar(car->getLicensePlate());
         human->purchaseTruck(truck->getLicensePlate());

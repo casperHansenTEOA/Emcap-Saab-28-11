@@ -44,8 +44,8 @@ std::string Human::getName() const{
     return name;
 };
 
-Human * Human::clone(){
-    Human * clone = new Human(name);
+std::unique_ptr<Human> Human::clone(){
+    std::unique_ptr<Human> clone = std::make_unique<Human>(name);
     clone->garage = garage;
     return clone;
 };

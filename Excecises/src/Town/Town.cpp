@@ -1,23 +1,24 @@
 #include "Town.h"
+#include <memory>
 
 
-void Town::addCarPark(CarPark* carPark){
-    carParks.push_back(carPark);
+void Town::addCarPark(std::unique_ptr<CarPark> carPark){
+    carParks.push_back(std::move(carPark));
 };
 
 
-void Town::addCar(Car* car){
-    cars.push_back(car);
+void Town::addCar(std::unique_ptr<Car> car){
+    cars.push_back(std::move(car));
 };
 
 
-void Town::addHuman(Human* human){
-    humans.push_back(human);
+void Town::addHuman(std::unique_ptr<Human> human){
+    humans.push_back(std::move(human));
 };
 
 
-void Town::addTruck(Truck* truck){
-    trucks.push_back(truck);
+void Town::addTruck(std::unique_ptr<Truck> truck){
+    trucks.push_back(std::move(truck));
 };
 
 
@@ -26,32 +27,32 @@ void Town::addGarage(std::shared_ptr<Garage> garage){
 };
 
 
-const std::vector<CarPark*>& Town::getCarParks() const{
+const std::vector<std::unique_ptr<CarPark>>& Town::getCarParks() const{
     return carParks;
 };
 
 
-const std::vector<Car*>& Town::getCars() const{
+const std::vector<std::unique_ptr<Car>>& Town::getCars() const{
     return cars;
 };
 
 
-const std::vector<Human*>& Town::getHumans() const{
+const std::vector<std::unique_ptr<Human>>& Town::getHumans() const{
     return humans;
 };
 
 
-const std::vector<Truck*>& Town::getTrucks() const{
+const std::vector<std::unique_ptr<Truck>>& Town::getTrucks() const{
     return trucks;
 };
 
 
-const std::vector<Garage*>& Town::getGarages() const{
+const std::vector<std::shared_ptr<Garage>>& Town::getGarages() const{
     return garages;
 };
 
-Garage* Town::buildGarage(){ 
-    Garage* garage = new Garage();
+std::shared_ptr<Garage> Town::buildGarage(){ 
+    std::shared_ptr<Garage> garage = std::make_shared<Garage>();
     return garage;
 }
 
@@ -96,9 +97,9 @@ void Town::run() {
                 cloneRandomHuman();
                 break;
             case 6: {
-                std::vector<Car*> cars = buildNRandomCars(2);
-                for (Car* car : cars) {
-                    addCar(car);
+                std::vector<std::unique_ptr<Car>> cars = buildNRandomCars(2);
+                for ( std::unique_ptr<Car>& car : cars) {
+                    addCar(std::move(car));
                 }
                 break;
             }
@@ -127,7 +128,7 @@ void Town::run() {
 void Town::moveRandomCarToRandomLocation() {
     if (cars.size() > 0) {
         int randomIndex = rand() % cars.size();
-        Car* car = cars[randomIndex];
+        std::unique_ptr<Car>& car = cars[randomIndex];
         Location newLocation = {static_cast<double>(rand() % 100), static_cast<double>(rand() % 100)};
         car->setLocation(newLocation);
         std::cout << "Moved car " << car->getLicensePlate() << " to new location (" << newLocation.x << ", " << newLocation.y << ")" << std::endl;
@@ -137,7 +138,7 @@ void Town::moveRandomCarToRandomLocation() {
 void Town::moveRandomTruckToRandomLocation() {
     if (trucks.size() > 0) {
         int randomIndex = rand() % trucks.size();
-        Truck* truck = trucks[randomIndex];
+        std::unique_ptr<Truck>& truck = trucks[randomIndex];
         Location newLocation = {static_cast<double>(rand() % 100), static_cast<double>(rand() % 100)};
         truck->setLocation(newLocation);
         std::cout << "Moved truck " << truck->getLicensePlate() << " to new location (" << newLocation.x << ", " << newLocation.y << ")" << std::endl;
@@ -147,11 +148,11 @@ void Town::moveRandomTruckToRandomLocation() {
 void Town::parkVehicleInNearestCarPark() {
     if (cars.size() > 0 && carParks.size() > 0) {
         int randomCarIndex = rand() % cars.size();
-        Car* car = cars[randomCarIndex];
+        std::unique_ptr<Car>& car = cars[randomCarIndex];
         Location carLocation = car->getLocation();
-        CarPark* nearestCarPark = findNearestAvailableCarPark(carParks, carLocation);
+        std::unique_ptr<CarPark> nearestCarPark = std::move(findNearestAvailableCarPark(carParks, carLocation));
         if (nearestCarPark != nullptr) {
-            nearestCarPark->addCar(car);
+            nearestCarPark->addCar(std::move(car));
             std::cout << "Parked car " << car->getLicensePlate() << " in nearest car park at location (" << nearestCarPark->getLocation().x << ", " << nearestCarPark->getLocation().y << ")" << std::endl;
         } else {
             std::cout << "No available car park found for car " << car->getLicensePlate() << std::endl;
@@ -170,9 +171,9 @@ void Town::calculateDistanceBetweenRandomLocations() {
 void Town::moveRandomCar(){
     if (cars.size() > 0){
         int randomIndex = rand() % cars.size();
-        Car* car = cars[randomIndex];
+        std::unique_ptr<Car>& car = cars[randomIndex];
         cars.erase(cars.begin() + randomIndex);
-        cars.push_back(car);
+        cars.push_back(std::move(car));
     }
 };
 
@@ -183,9 +184,9 @@ void Town::moveRandomCar(){
 void Town::moveRandomTruck(){
     if (trucks.size() > 0){
         int randomIndex = rand() % trucks.size();
-        Truck* truck = trucks[randomIndex];
+        std::unique_ptr<Truck>& truck = trucks[randomIndex];
         trucks.erase(trucks.begin() + randomIndex);
-        trucks.push_back(truck);
+        trucks.push_back(std::move(truck));
     }
 };
 
@@ -195,26 +196,26 @@ void Town::moveRandomTruck(){
 void Town::humanInteractsWithCar(){
     if (humans.size() > 0 && cars.size() > 0){
         int randomHumanIndex = rand() % humans.size();
-        Human* human = humans[randomHumanIndex];
+        std::unique_ptr<Human>& human = humans[randomHumanIndex];
         int randomCarIndex = rand() % cars.size();
-        Car* car = cars[randomCarIndex];
+        std::unique_ptr<Car>& car = cars[randomCarIndex];
         human->purchaseCar(car->getLicensePlate());
     }
 };
 
-
-std::vector<Car*> Town::buildNRandomCars(int n){
-    char * * licensePlates = new char * [n];
+std::vector<std::unique_ptr<Car>> Town::buildNRandomCars(int n){
+    std::vector<std::string> licensePlates; // Vector to hold generated license plates instead of array iwth pointers and also initialisation is not needed
+    licensePlates.resize(n);
 
     for (int i = 0; i < n; ++i){
         licensePlates[i] = generateRandomLicensePlate();
     }
 
-    std::vector<Car*> cars;
+    std::vector<std::unique_ptr<Car>> cars;
 
     for (int i = 0; i < n; ++i){
-        Car* car = new Car(licensePlates[i]);
-        cars.push_back(car);
+        std::unique_ptr<Car> car = std::make_unique<Car>(licensePlates[i]);
+        cars.push_back(std::move(car));
     }
 
     return cars;
@@ -227,9 +228,9 @@ std::vector<Car*> Town::buildNRandomCars(int n){
 void Town::humanInteractsWithTruck(){
     if (humans.size() > 0 && trucks.size() > 0){
         int randomHumanIndex = rand() % humans.size();
-        Human* human = humans[randomHumanIndex];
+        std::unique_ptr<Human>& human = humans[randomHumanIndex];
         int randomTruckIndex = rand() % trucks.size();
-        Truck* truck = trucks[randomTruckIndex];
+        std::unique_ptr<Truck>& truck = trucks[randomTruckIndex];
         human->purchaseTruck(truck->getLicensePlate());
     }
 };
@@ -238,19 +239,18 @@ void Town::humanInteractsWithTruck(){
 void Town::useRandomGarage(){
     if (garages.size() > 0){
         int randomIndex = rand() % garages.size();
-        Garage* garage = garages[randomIndex];
+        std::shared_ptr<Garage> garage = garages[randomIndex];
         garage->listVehicles();
     }
 };
 
 void Town::cloneRandomHuman(){
-    Human* human = new Human("Human" + std::to_string(humans.size()));
+    std::unique_ptr<Human> human; 
    
     if (humans.size() > 0){
         int randomIndex = rand() % humans.size();
-        human = humans[randomIndex];
-        human = human->clone();
-        humans.push_back(human);
+        human = humans[randomIndex]->clone();
+        humans.push_back(std::move(human));
     }
 };
 
@@ -277,7 +277,7 @@ void Town::printState(std::size_t rotation) const {
     if (!cars.empty()) {
         std::cout << "  Sample cars:" << '\n';
         for (std::size_t i = 0; i < std::min(previewCount, cars.size()); ++i) {
-            Car* car = cars[i];
+            const std::unique_ptr<Car>& car = cars[i];
             Location loc = car->getLocation();
             std::cout << "    #" << (i + 1) << " " << car->getLicensePlate()
                       << " @ (" << loc.x << ", " << loc.y << ")" << '\n';
@@ -287,7 +287,7 @@ void Town::printState(std::size_t rotation) const {
     if (!trucks.empty()) {
         std::cout << "  Sample trucks:" << '\n';
         for (std::size_t i = 0; i < std::min(previewCount, trucks.size()); ++i) {
-            Truck* truck = trucks[i];
+            const std::unique_ptr<Truck>& truck = trucks[i];
             Location loc = truck->getLocation();
             std::cout << "    #" << (i + 1) << " " << truck->getLicensePlate()
                       << " @ (" << loc.x << ", " << loc.y << ")" << '\n';
@@ -297,7 +297,7 @@ void Town::printState(std::size_t rotation) const {
     if (!carParks.empty()) {
         std::cout << "  Car parks: " << '\n';
         for (std::size_t i = 0; i < std::min(previewCount, carParks.size()); ++i) {
-            const CarPark* carPark = carParks[i];
+            const std::unique_ptr<CarPark>& carPark = carParks[i];
             const Location& loc = carPark->getLocation();
             std::cout << "    #" << (i + 1) << " capacity " << carPark->getCapacity()
                       << " load " << carPark->getCurrentLoad()

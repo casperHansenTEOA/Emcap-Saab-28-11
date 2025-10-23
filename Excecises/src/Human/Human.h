@@ -85,7 +85,7 @@ public:
      * 
      * @return A pointer to the cloned human.
      */
-    Human* clone();
+    std::unique_ptr<Human> clone();
 
 private:
     std::string name; ///< The name of the human.

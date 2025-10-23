@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <limits>
+#include <memory>
 #include "CarPark.h"
 
 #include "../Location.h"
@@ -21,8 +22,8 @@ CarPark::CarPark(const Location& location, int capacity)
  * 
  * @return A randomly generated license plate.
  */
-char* generateRandomLicensePlate(){
-    char* licensePlate = new char[7];
+const char* generateRandomLicensePlate(){
+    static char licensePlate[7];
     for (int i = 0; i < 3; ++i){
         licensePlate[i] = static_cast<char>('A' + rand() % 26);
     }
@@ -34,10 +35,10 @@ char* generateRandomLicensePlate(){
 };
 
 
-bool CarPark::addCar(Car* car){
+bool CarPark::addCar(std::unique_ptr<Car> car){
     if (currentCars < capacity){
         car->stop();
-        cars.push_back(car);
+        cars.push_back(std::move(car));
         currentCars++;
         return true;
     }
@@ -45,7 +46,7 @@ bool CarPark::addCar(Car* car){
 };
 
 
-bool CarPark::addTruck(Truck* truck){
+bool CarPark::addTruck(std::unique_ptr<Truck>truck){
     if (currentCars < capacity){
         truck->stop();
         trucks.push_back(truck);
@@ -55,12 +56,11 @@ bool CarPark::addTruck(Truck* truck){
     return false;
 };
 
-bool CarPark::removeCar(const std::string& licensePlate){
+bool CarPark::removeCar(const std::string licensePlate){
     for (auto it = cars.begin(); it != cars.end(); ++it){
-        if ((*it)->getLicensePlate() == licensePlate){
+        std::unique_ptr<Car>& car = *it;
+        if ((car)->getLicensePlate() == licensePlate){
             // throwaway new  here which is a memory leak
-            Car *car = new Car(licensePlate);
-            car = *it;
             cars.erase(it);
             car->move(Direction::North);
             currentCars--;
@@ -70,12 +70,11 @@ bool CarPark::removeCar(const std::string& licensePlate){
     return false;
 }
 
-bool CarPark::removeTruck(const std::string& licensePlate){
+bool CarPark::removeTruck(const std::string licensePlate){
     for (auto it = trucks.begin(); it != trucks.end(); ++it){
-        if ((*it)->getLicensePlate() == licensePlate){
-            Truck *truck = new Truck(licensePlate);
+        std::unique_ptr<Truck>& truck = *it;
+        if ((truck)->getLicensePlate() == licensePlate){
             // throwaway new  here which is a memory leak
-            truck = *it;
             trucks.erase(it);
             truck->move(Direction::North);
             currentCars--;
@@ -85,18 +84,20 @@ bool CarPark::removeTruck(const std::string& licensePlate){
     return false;
 }
 
-bool CarPark::parkVehicle(Vehicle* vehicle){
-    if (Car* car = dynamic_cast<Car*>(vehicle)){ //TODO casting is cringe
-        return addCar(car);
-    } else if (Truck* truck = dynamic_cast<Truck*>(vehicle)){ //TODO casting is cringe
-        return addTruck(truck);
+bool CarPark::parkVehicle(std::unique_ptr<Vehicle> vehicle){
+    if (Car* car_ptr = dynamic_cast<Car*>(vehicle.get())){
+        vehicle.release(); // release ownership from the original unique_ptr
+        return addCar(std::unique_ptr<Car>(car_ptr));
+    } else if (Truck* truck_ptr = dynamic_cast<Truck*>(vehicle.get())){
+        vehicle.release(); // release ownership from the original unique_ptr
+        return addTruck(std::unique_ptr<Truck>(truck_ptr));
     }
     return false;
 }
 
 
 
-void CarPark::assignCarToHuman(const std::string& humanName, const std::string& licensePlate){
+void CarPark::assignCarToHuman(const std::string humanName, const std::string licensePlate){
     humanCarMap[humanName] = licensePlate;
 };
 
@@ -133,17 +134,17 @@ double calculateDistance(const Location& loc1, const Location& loc2){
 };
 
 
-CarPark* findNearestAvailableCarPark(const std::vector<CarPark*>& carParks, const Location& currentLocation){
-    CarPark* nearestCarPark = nullptr;
+std::unique_ptr<CarPark> findNearestAvailableCarPark(const std::vector<std::unique_ptr<CarPark>>& carParks, const Location& currentLocation){
+    CarPark* nearest = nullptr;
     double minDistance = std::numeric_limits<double>::max();
-    for (CarPark* carPark : carParks){
+    for (const std::unique_ptr<CarPark>& carPark : carParks){
         double distance = calculateDistance(currentLocation, carPark->getLocation());
         if (distance < minDistance && carPark->hasSpace()){
             minDistance = distance;
-            nearestCarPark = carPark;
+            nearest = carPark.get();
         }
     }
-    return nearestCarPark;
+    return std::unique_ptr<CarPark>(nearest);
 };
 
 
