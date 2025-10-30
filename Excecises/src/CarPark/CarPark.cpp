@@ -135,16 +135,16 @@ double calculateDistance(const Location& loc1, const Location& loc2){
 
 
 std::unique_ptr<CarPark> findNearestAvailableCarPark(const std::vector<std::unique_ptr<CarPark>>& carParks, const Location& currentLocation){
-    CarPark* nearest = nullptr;
+    std::unique_ptr<CarPark> nearest;
     double minDistance = std::numeric_limits<double>::max();
-    for (const std::unique_ptr<CarPark>& carPark : carParks){
+    for (const auto& carPark : carParks){
         double distance = calculateDistance(currentLocation, carPark->getLocation());
         if (distance < minDistance && carPark->hasSpace()){
             minDistance = distance;
-            nearest = carPark.get();
+            nearest = std::make_unique<CarPark>(*carPark);
         }
     }
-    return std::unique_ptr<CarPark>(nearest);
+    return std::move(nearest);
 };
 
 

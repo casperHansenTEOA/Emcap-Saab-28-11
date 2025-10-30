@@ -152,10 +152,11 @@ void Town::parkVehicleInNearestCarPark() {
         Location carLocation = car->getLocation();
         std::unique_ptr<CarPark> nearestCarPark = std::move(findNearestAvailableCarPark(carParks, carLocation));
         if (nearestCarPark != nullptr) {
+                        std::cout << "Parked car " << car->getLicensePlate() << " in nearest car park at location (" << nearestCarPark->getLocation().x << ", " << nearestCarPark->getLocation().y << ")" << std::endl;
+
             nearestCarPark->addCar(std::move(car));
-            std::cout << "Parked car " << car->getLicensePlate() << " in nearest car park at location (" << nearestCarPark->getLocation().x << ", " << nearestCarPark->getLocation().y << ")" << std::endl;
         } else {
-            std::cout << "No available car park found for car " << car->getLicensePlate() << std::endl;
+            std::cout << "No available car park found for car " << std::endl;
         }
     }
 }
