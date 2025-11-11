@@ -37,20 +37,17 @@ const char* generateRandomLicensePlate(){
 
 bool CarPark::addCar(std::unique_ptr<Car> car){
     if (currentCars < capacity){
-        car->stop();
-        cars.push_back(std::move(car));
-        currentCars++;
+        cars.push_back(std::move(car)); // <- move, not copy
+        ++currentCars;
         return true;
     }
     return false;
 };
 
-
-bool CarPark::addTruck(std::unique_ptr<Truck>truck){
+bool CarPark::addTruck(std::unique_ptr<Truck> truck){
     if (currentCars < capacity){
-        truck->stop();
-        trucks.push_back(truck);
-        currentCars++;
+        trucks.push_back(std::move(truck)); // <- move, not copy
+        ++currentCars;
         return true;
     }
     return false;
@@ -133,18 +130,19 @@ double calculateDistance(const Location& loc1, const Location& loc2){
     return sqrt(pow(loc1.x - loc2.x, 2) + pow(loc1.y - loc2.y, 2));
 };
 
-
-std::unique_ptr<CarPark> findNearestAvailableCarPark(const std::vector<std::unique_ptr<CarPark>>& carParks, const Location& currentLocation){
-    std::unique_ptr<CarPark> nearest;
-    double minDistance = std::numeric_limits<double>::max();
-    for (const auto& carPark : carParks){
-        double distance = calculateDistance(currentLocation, carPark->getLocation());
-        if (distance < minDistance && carPark->hasSpace()){
-            minDistance = distance;
-            nearest = std::make_unique<CarPark>(*carPark);
+CarPark* findNearestAvailableCarPark(const std::vector<std::unique_ptr<CarPark>>& carParks, const Location& currentLocation){
+    CarPark* nearest = nullptr;
+    double bestDist = std::numeric_limits<double>::infinity();
+    for (const auto& carParkPtr : carParks){
+        if (!carParkPtr) continue;
+        if (!carParkPtr->hasSpace()) continue;
+        double d = calculateDistance(carParkPtr->getLocation(), currentLocation);
+        if (d < bestDist){
+            bestDist = d;
+            nearest = carParkPtr.get(); // non-owning pointer to existing unique_ptr
         }
     }
-    return std::move(nearest);
+    return nearest;
 };
 
 

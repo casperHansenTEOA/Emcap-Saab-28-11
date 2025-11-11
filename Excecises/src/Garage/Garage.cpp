@@ -42,27 +42,21 @@ Truck* Garage::takeTruck(const std::string& licensePlate){
 
 
  std::vector<Vehicle*> Garage::listVehicles() const{
-    std::vector<std::unique_ptr<Car>> cars = std::move(this->cars);
-    std::vector<std::unique_ptr<Truck>> trucks = std::move(this->trucks);
-    Location * location;
-
-    std::vector<Vehicle*> vehicles;
-    for (std::unique_ptr<Car>& car : cars){
-        std::cout << "Car: " << car->getLicensePlate() << std::endl;
-        location = new Location(car->getLocation().x, car->getLocation().y);
-        vehicles.push_back(new Vehicle(car->getLicensePlate(), *location));
-        
-    }
-    for (std::unique_ptr<Truck>& truck : trucks){
-        std::cout << "Truck: " << truck->getLicensePlate() << std::endl;
-        location = new Location(truck->getLocation().x, truck->getLocation().y);
-        vehicles.push_back(new Vehicle(truck->getLicensePlate(), *location));
+    std::cout << "Cars in garage:\n";
+    for (const auto& carPtr : this->cars) {
+        if (carPtr) {
+            std::cout << " - " << carPtr->getLicensePlate() << '\n';
+        }
     }
 
-    return vehicles;
+    std::cout << "Trucks in garage:\n";
+    for (const auto& truckPtr : this->trucks) {
+        if (truckPtr) {
+            std::cout << " - " << truckPtr->getLicensePlate() << '\n';
+        }
+    }
+
+    return std::vector<Vehicle*>{};
 
 };
-
-
-//TODO a car starts moving when it is removed from the garage and stops when it is put back 
 

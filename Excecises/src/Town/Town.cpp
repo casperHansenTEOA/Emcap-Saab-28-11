@@ -150,7 +150,7 @@ void Town::parkVehicleInNearestCarPark() {
         int randomCarIndex = rand() % cars.size();
         std::unique_ptr<Car>& car = cars[randomCarIndex];
         Location carLocation = car->getLocation();
-        std::unique_ptr<CarPark> nearestCarPark = std::move(findNearestAvailableCarPark(carParks, carLocation));
+        CarPark* nearestCarPark = findNearestAvailableCarPark(carParks, carLocation);
         if (nearestCarPark != nullptr) {
                         std::cout << "Parked car " << car->getLicensePlate() << " in nearest car park at location (" << nearestCarPark->getLocation().x << ", " << nearestCarPark->getLocation().y << ")" << std::endl;
 

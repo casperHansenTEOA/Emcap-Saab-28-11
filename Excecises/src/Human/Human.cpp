@@ -1,4 +1,5 @@
 #include "Human.h"
+#include <iostream>
 Human::Human(const std::string name){
     this->name = std::string(name);
     garage = std::make_shared<Garage>();
@@ -7,6 +8,7 @@ Human::Human(const std::string name){
 
 void Human::addGarage(std::shared_ptr<Garage> garage){
     this->garage = garage;
+    std::cout << "Garage added to human " << name << std::endl;
 };
 void Human::purchaseCar(const std::string licensePlate){
     std::unique_ptr<Car> car = std::make_unique<Car>(licensePlate);

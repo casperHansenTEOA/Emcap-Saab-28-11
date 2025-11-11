@@ -140,6 +140,6 @@ double calculateDistance(const Location& loc1, const Location& loc2);
  * @param currentLocation The current location.
  * @return Pointer to the nearest available car park, or nullptr if no car park is available.
  */
-std::unique_ptr<CarPark> findNearestAvailableCarPark(const std::vector<std::unique_ptr<CarPark>>& carParks, const Location& currentLocation);
+CarPark* findNearestAvailableCarPark(const std::vector<std::unique_ptr<CarPark>>& carParks, const Location& currentLocation);
 
 #endif // CARPARK_H
