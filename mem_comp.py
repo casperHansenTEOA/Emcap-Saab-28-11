@@ -14,6 +14,7 @@ os.system('cd Excecises/src && make')
 
 
 # Start the program town_sim.exe (Windows) or ./town_sim (Linux/Mac) then wait a bit  
+os.chdir('Excecises/src')
 print("Successfully compiled .Starting town_sim...")
 proc = subprocess.Popen(['./town_sim.exe' if os.name == 'nt' else './town_sim'])
 try:
