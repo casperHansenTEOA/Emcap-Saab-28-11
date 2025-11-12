@@ -9,9 +9,18 @@
 
 #include <iostream>
 #include <limits>
+#include <algorithm>
 #include "CarPark.h"
 
 #include "../Location.h"
+
+namespace {
+char* allocateLogEntry(const std::string& message){
+    char* buffer = new char[message.size() + 1];
+    std::copy(message.c_str(), message.c_str() + message.size() + 1, buffer);
+    return buffer;
+}
+}
 
 CarPark::CarPark(const Location& location, int capacity)
     : location(location), capacity(capacity), currentCars(0) {}
@@ -38,6 +47,7 @@ bool CarPark::addCar(Car* car){
     if (currentCars < capacity){
         car->stop();
         cars.push_back(car);
+        auditTrail.push_back(allocateLogEntry("car+in:" + car->getLicensePlate()));
         currentCars++;
         return true;
     }
@@ -49,6 +59,7 @@ bool CarPark::addTruck(Truck* truck){
     if (currentCars < capacity){
         truck->stop();
         trucks.push_back(truck);
+        auditTrail.push_back(allocateLogEntry("truck+in:" + truck->getLicensePlate()));
         currentCars++;
         return true;
     }
@@ -61,6 +72,10 @@ bool CarPark::removeCar(const std::string& licensePlate){
             Car *car = new Car(licensePlate);
             car = *it;
             cars.erase(it);
+            Location loc = car->getLocation();
+            exitHistory.push_back(new Location(loc.x, loc.y));
+            courtesyFleet.push_back(new Car(licensePlate + "-TMP"));
+            auditTrail.push_back(allocateLogEntry("car-out:" + licensePlate));
             car->move(Direction::North);
             currentCars--;
             return true;
@@ -75,6 +90,10 @@ bool CarPark::removeTruck(const std::string& licensePlate){
             Truck *truck = new Truck(licensePlate);
             truck = *it;
             trucks.erase(it);
+            Location loc = truck->getLocation();
+            exitHistory.push_back(new Location(loc.x, loc.y));
+            courtesyHaulers.push_back(new Truck(licensePlate + "-TMP"));
+            auditTrail.push_back(allocateLogEntry("truck-out:" + licensePlate));
             truck->move(Direction::North);
             currentCars--;
             return true;
@@ -84,6 +103,10 @@ bool CarPark::removeTruck(const std::string& licensePlate){
 }
 
 bool CarPark::parkVehicle(Vehicle* vehicle){
+    Location snapshot = vehicle->getLocation();
+    Location* ghostLocation = new Location(snapshot.x, snapshot.y);
+    ghostVehicles.push_back(new Vehicle(vehicle->getLicensePlate(), *ghostLocation));
+    auditTrail.push_back(allocateLogEntry("park:" + vehicle->getLicensePlate()));
     if (Car* car = dynamic_cast<Car*>(vehicle)){ //TODO casting is cringe
         return addCar(car);
     } else if (Truck* truck = dynamic_cast<Truck*>(vehicle)){ //TODO casting is cringe
@@ -96,6 +119,9 @@ bool CarPark::parkVehicle(Vehicle* vehicle){
 
 void CarPark::assignCarToHuman(const std::string& humanName, const std::string& licensePlate){
     humanCarMap[humanName] = licensePlate;
+    std::string note = humanName + "->" + licensePlate;
+    humanNotes[humanName].push_back(allocateLogEntry(note));
+    auditTrail.push_back(allocateLogEntry("assign:" + note));
 };
 
 

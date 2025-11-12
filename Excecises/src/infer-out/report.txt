@@ -1,0 +1,54 @@
+#0
+CarPark/CarPark.cpp:72: error: Dead Store
+  The value written to `&car` is never used. 
+  70.     for (auto it = cars.begin(); it != cars.end(); ++it){
+  71.         if ((*it)->getLicensePlate() == licensePlate){
+  72.             Car *car = new Car(licensePlate);
+                  ^
+  73.             car = *it;
+  74.             cars.erase(it);
+
+#1
+CarPark/CarPark.cpp:90: error: Dead Store
+  The value written to `&truck` is never used. 
+  88.     for (auto it = trucks.begin(); it != trucks.end(); ++it){
+  89.         if ((*it)->getLicensePlate() == licensePlate){
+  90.             Truck *truck = new Truck(licensePlate);
+                  ^
+  91.             truck = *it;
+  92.             trucks.erase(it);
+
+#2
+Garage/Garage.cpp:44: error: Unnecessary Copy
+  copied variable `cars` is not modified after it is copied from `this->cars` on line 44. To avoid the copy, use reference `&`. If this copy was intentional, call `folly::copy` to make it explicit and hence suppress the warning.
+  42. 
+  43.  std::vector<Vehicle*> Garage::listVehicles() const{
+  44.     std::vector <Car*> cars = this->cars;
+                                    ^
+  45.     std::vector <Truck*> trucks = this->trucks;
+  46.     Location * location;
+
+#3
+Garage/Garage.cpp:45: error: Unnecessary Copy
+  copied variable `trucks` is not modified after it is copied from `this->trucks` on line 45. To avoid the copy, use reference `&`. If this copy was intentional, call `folly::copy` to make it explicit and hence suppress the warning.
+  43.  std::vector<Vehicle*> Garage::listVehicles() const{
+  44.     std::vector <Car*> cars = this->cars;
+  45.     std::vector <Truck*> trucks = this->trucks;
+                                        ^
+  46.     Location * location;
+  47. 
+
+#4
+Town/Town.cpp:250: error: Dead Store
+  The value written to `&human` is never used. 
+  248. 
+  249. void Town::cloneRandomHuman(){
+  250.     Human* human = new Human("Human" + std::to_string(humans.size()));
+           ^
+  251.    
+  252.     if (humans.size() > 0){
+
+Found 5 issues
+                Issue Type(ISSUED_TYPE_ID): #
+                    Dead Store(DEAD_STORE): 3
+  Unnecessary Copy(PULSE_UNNECESSARY_COPY): 2

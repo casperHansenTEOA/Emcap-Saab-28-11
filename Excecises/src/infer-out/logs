@@ -1,0 +1,495 @@
+[2713][  user warn] Cannot setup the socket to communicate with the database daemon. Performance will be impacted. Do you have enough rights to create a Unix socket in directory '/mnt/c/Users/casha/GitHub/Emcap-Saab-28-11/Excecises/src/infer-out'?
+[2713][environment] CWD = /mnt/c/Users/casha/GitHub/Emcap-Saab-28-11/Excecises/src
+[2713][environment] No .inferconfig file found
+[2713][environment] Project root = /mnt/c/Users/casha/GitHub/Emcap-Saab-28-11/Excecises/src
+[2713][environment] INFER_ARGS =   --progress-bar-style multiline
+[2713][environment] command line arguments:   infer -- make
+[2713][environment] Available memory at startup: 15131 MB
+[2713][environment] Active checkers: self-in-block (C/C++/ObjC), parameter-not-null-checked (C/C++/ObjC), starvation (C/C++/ObjC, Java), siof (C/C++/ObjC), racerd (C/C++/ObjC, C#/.Net, Java), pulse (C/C++/ObjC, C#/.Net, Erlang, Hack, Java, Python), liveness (C/C++/ObjC), inefficient-keyset-iterator (Java), fragment-retains-view (Java)
+[2713][environment] Scheduler: restart
+[2713][environment] Cores used: 8
+[2713][environment] Infer version v1.2.0
+[2713][environment] Copyright 2009 - present Facebook. All Rights Reserved.
+[2713][environment] 
+[2713][   progress] Capturing in make/cc mode...
+[2713][environment] Running command make with env:
+[2713][environment] (Extend((PATH"/opt/infer/lib/infer/infer/bin/../lib/wrappers:/mnt/c/Users/casha/GitHub/Emcap-Saab-28-11/Excecises/src/infer-linux64-v1.2.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/Eclipse Adoptium/jdk-17.0.15.6-hotspot/bin:/mnt/c/Program Files/Microsoft SDKs/Azure/CLI2/wbin:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Tailscale/:/mnt/c/Program Files/Git/cmd:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/ProgramData/chocolatey/lib/maven/apache-maven-3.9.10/bin:/mnt/c/Users/casha/Documents/apache-maven-3.9.10/bin:/mnt/c/Program Files/Mullvad VPN/resources:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/:/mnt/c/Program Files/CMake/bin:/mnt/c/msys64/ucrt64/bin:/mnt/c/Users/casha/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/casha/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/casha/AppData/Local/Microsoft/WinGet/Packages/Hashicorp.Terraform_Microsoft.Winget.Source_8wekyb3d8bbwe:/mnt/c/Users/casha/AppData/Local/GitHubDesktop/bin:/mnt/c/msys64/ucrt64/bin:/mnt/c/Users/casha/.vscode/extensions/ms-python.debugpy-2025.14.1-win32-x64/bundled/scripts/noConfigScripts:/mnt/c/Users/casha/.vscode/extensions/skyletoft.md407-code-1.0.2/native_dependencies/bin:/mnt/c/Users/casha/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand:/snap/bin:/opt/infer/bin")(INFER_OLD_PATH"/mnt/c/Users/casha/GitHub/Emcap-Saab-28-11/Excecises/src/infer-linux64-v1.2.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/Eclipse Adoptium/jdk-17.0.15.6-hotspot/bin:/mnt/c/Program Files/Microsoft SDKs/Azure/CLI2/wbin:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Tailscale/:/mnt/c/Program Files/Git/cmd:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/ProgramData/chocolatey/lib/maven/apache-maven-3.9.10/bin:/mnt/c/Users/casha/Documents/apache-maven-3.9.10/bin:/mnt/c/Program Files/Mullvad VPN/resources:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/:/mnt/c/Program Files/CMake/bin:/mnt/c/msys64/ucrt64/bin:/mnt/c/Users/casha/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/casha/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/casha/AppData/Local/Microsoft/WinGet/Packages/Hashicorp.Terraform_Microsoft.Winget.Source_8wekyb3d8bbwe:/mnt/c/Users/casha/AppData/Local/GitHubDesktop/bin:/mnt/c/msys64/ucrt64/bin:/mnt/c/Users/casha/.vscode/extensions/ms-python.debugpy-2025.14.1-win32-x64/bundled/scripts/noConfigScripts:/mnt/c/Users/casha/.vscode/extensions/skyletoft.md407-code-1.0.2/native_dependencies/bin:/mnt/c/Users/casha/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand:/snap/bin:/opt/infer/bin")))
+[2713][environment] 
+
+[2715][      debug] 
+[2715][      debug] *** Beginning capture of file /mnt/c/Users/casha/GitHub/Emcap-Saab-28-11/Excecises/src/main.cpp ***
+[2715][      debug] Elapsed: 1.25s.
+[2715][      debug] GC stats for capture:
+[2715][      debug]   minor_words: 4.04871e+07
+[2715][      debug]   promoted_words: 1.0261e+07
+[2715][      debug]   major_words: 1.09001e+07
+[2715][      debug]   minor_collections: 44
+[2715][      debug]   major_collections: 5
+[2715][      debug]   compactions: 0
+[2715][      debug]   top_heap_words: 12475392
+[2715][      debug]   
+[2715][      debug] GC stats for main_process_full:
+[2715][      debug]   minor_words: 4.32079e+07
+[2715][      debug]   promoted_words: 1.09683e+07
+[2715][      debug]   major_words: 1.1645e+07
+[2715][      debug]   minor_collections: 52
+[2715][      debug]   major_collections: 6
+[2715][      debug]   compactions: 0
+[2715][      debug]   top_heap_words: 12475392
+[2715][      debug]   
+
+[2720][      debug] 
+[2720][      debug] *** Beginning capture of file /mnt/c/Users/casha/GitHub/Emcap-Saab-28-11/Excecises/src/CarPark/CarPark.cpp ***
+[2720][      debug] Elapsed: 1.72s.
+[2720][      debug] GC stats for capture:
+[2720][      debug]   minor_words: 4.65875e+07
+[2720][      debug]   promoted_words: 1.11674e+07
+[2720][      debug]   major_words: 1.18128e+07
+[2720][      debug]   minor_collections: 49
+[2720][      debug]   major_collections: 6
+[2720][      debug]   compactions: 0
+[2720][      debug]   top_heap_words: 12475392
+[2720][      debug]   
+[2720][      debug] GC stats for main_process_full:
+[2720][      debug]   minor_words: 4.93082e+07
+[2720][      debug]   promoted_words: 1.18746e+07
+[2720][      debug]   major_words: 1.25577e+07
+[2720][      debug]   minor_collections: 57
+[2720][      debug]   major_collections: 7
+[2720][      debug]   compactions: 0
+[2720][      debug]   top_heap_words: 12475392
+[2720][      debug]   
+
+[2725][      debug] 
+[2725][      debug] *** Beginning capture of file /mnt/c/Users/casha/GitHub/Emcap-Saab-28-11/Excecises/src/Garage/Garage.cpp ***
+[2725][      debug] Elapsed: 938ms.
+[2725][      debug] GC stats for capture:
+[2725][      debug]   minor_words: 2.74213e+07
+[2725][      debug]   promoted_words: 6.22199e+06
+[2725][      debug]   major_words: 6.56235e+06
+[2725][      debug]   minor_collections: 31
+[2725][      debug]   major_collections: 5
+[2725][      debug]   compactions: 0
+[2725][      debug]   top_heap_words: 8202240
+[2725][      debug]   
+[2725][      debug] GC stats for main_process_full:
+[2725][      debug]   minor_words: 3.01421e+07
+[2725][      debug]   promoted_words: 6.92921e+06
+[2725][      debug]   major_words: 7.30723e+06
+[2725][      debug]   minor_collections: 39
+[2725][      debug]   major_collections: 6
+[2725][      debug]   compactions: 0
+[2725][      debug]   top_heap_words: 8202240
+[2725][      debug]   
+
+[2730][      debug] 
+[2730][      debug] *** Beginning capture of file /mnt/c/Users/casha/GitHub/Emcap-Saab-28-11/Excecises/src/Human/Human.cpp ***
+[2730][      debug] Elapsed: 617ms.
+[2730][      debug] GC stats for capture:
+[2730][      debug]   minor_words: 2.33284e+07
+[2730][      debug]   promoted_words: 5.50332e+06
+[2730][      debug]   major_words: 5.83167e+06
+[2730][      debug]   minor_collections: 26
+[2730][      debug]   major_collections: 4
+[2730][      debug]   compactions: 0
+[2730][      debug]   top_heap_words: 7132160
+[2730][      debug]   
+[2730][      debug] GC stats for main_process_full:
+[2730][      debug]   minor_words: 2.60491e+07
+[2730][      debug]   promoted_words: 6.21054e+06
+[2730][      debug]   major_words: 6.57655e+06
+[2730][      debug]   minor_collections: 34
+[2730][      debug]   major_collections: 5
+[2730][      debug]   compactions: 0
+[2730][      debug]   top_heap_words: 7132160
+[2730][      debug]   
+
+[2739][      debug] 
+[2739][      debug] *** Beginning capture of file /mnt/c/Users/casha/GitHub/Emcap-Saab-28-11/Excecises/src/Town/Town.cpp ***
+[2739][      debug] Elapsed: 1.27s.
+[2739][      debug] GC stats for capture:
+[2739][      debug]   minor_words: 5.10657e+07
+[2739][      debug]   promoted_words: 1.16825e+07
+[2739][      debug]   major_words: 1.236e+07
+[2739][      debug]   minor_collections: 52
+[2739][      debug]   major_collections: 3
+[2739][      debug]   compactions: 0
+[2739][      debug]   top_heap_words: 14346752
+[2739][      debug]   
+[2739][      debug] GC stats for main_process_full:
+[2739][      debug]   minor_words: 5.37865e+07
+[2739][      debug]   promoted_words: 1.23898e+07
+[2739][      debug]   major_words: 1.31049e+07
+[2739][      debug]   minor_collections: 60
+[2739][      debug]   major_collections: 4
+[2739][      debug]   compactions: 0
+[2739][      debug]   top_heap_words: 14346752
+[2739][      debug]   
+
+[2744][      debug] 
+[2744][      debug] *** Beginning capture of file /mnt/c/Users/casha/GitHub/Emcap-Saab-28-11/Excecises/src/Vehicles/Car.cpp ***
+[2744][      debug] Elapsed: 386ms.
+[2744][      debug] GC stats for capture:
+[2744][      debug]   minor_words: 1.75953e+07
+[2744][      debug]   promoted_words: 3.7759e+06
+[2744][      debug]   major_words: 4.02285e+06
+[2744][      debug]   minor_collections: 19
+[2744][      debug]   major_collections: 3
+[2744][      debug]   compactions: 0
+[2744][      debug]   top_heap_words: 5392896
+[2744][      debug]   
+[2744][      debug] GC stats for main_process_full:
+[2744][      debug]   minor_words: 2.03161e+07
+[2744][      debug]   promoted_words: 4.48312e+06
+[2744][      debug]   major_words: 4.76773e+06
+[2744][      debug]   minor_collections: 27
+[2744][      debug]   major_collections: 4
+[2744][      debug]   compactions: 0
+[2744][      debug]   top_heap_words: 5392896
+[2744][      debug]   
+
+[2749][      debug] 
+[2749][      debug] *** Beginning capture of file /mnt/c/Users/casha/GitHub/Emcap-Saab-28-11/Excecises/src/Vehicles/Truck.cpp ***
+[2749][      debug] Elapsed: 718ms.
+[2749][      debug] GC stats for capture:
+[2749][      debug]   minor_words: 1.91038e+07
+[2749][      debug]   promoted_words: 4.06263e+06
+[2749][      debug]   major_words: 4.31404e+06
+[2749][      debug]   minor_collections: 20
+[2749][      debug]   major_collections: 3
+[2749][      debug]   compactions: 0
+[2749][      debug]   top_heap_words: 5392896
+[2749][      debug]   
+[2749][      debug] GC stats for main_process_full:
+[2749][      debug]   minor_words: 2.18246e+07
+[2749][      debug]   promoted_words: 4.76985e+06
+[2749][      debug]   major_words: 5.05892e+06
+[2749][      debug]   minor_collections: 28
+[2749][      debug]   major_collections: 4
+[2749][      debug]   compactions: 0
+[2749][      debug]   top_heap_words: 5392896
+[2749][      debug]   
+
+[2754][      debug] 
+[2754][      debug] *** Beginning capture of file /mnt/c/Users/casha/GitHub/Emcap-Saab-28-11/Excecises/src/Vehicles/Vehicle.cpp ***
+[2754][      debug] Elapsed: 558ms.
+[2754][      debug] GC stats for capture:
+[2754][      debug]   minor_words: 2.65729e+07
+[2754][      debug]   promoted_words: 5.78131e+06
+[2754][      debug]   major_words: 6.09462e+06
+[2754][      debug]   minor_collections: 30
+[2754][      debug]   major_collections: 4
+[2754][      debug]   compactions: 0
+[2754][      debug]   top_heap_words: 7132160
+[2754][      debug]   
+[2754][      debug] GC stats for main_process_full:
+[2754][      debug]   minor_words: 2.92937e+07
+[2754][      debug]   promoted_words: 6.48853e+06
+[2754][      debug]   major_words: 6.8395e+06
+[2754][      debug]   minor_collections: 38
+[2754][      debug]   major_collections: 5
+[2754][      debug]   compactions: 0
+[2754][      debug]   top_heap_words: 7132160
+[2754][      debug]   
+
+[2759][      debug] GC stats for capture:
+[2759][      debug]   minor_words: 15324
+[2759][      debug]   promoted_words: 0
+[2759][      debug]   major_words: 514
+[2759][      debug]   minor_collections: 0
+[2759][      debug]   major_collections: 0
+[2759][      debug]   compactions: 0
+[2759][      debug]   top_heap_words: 760832
+[2759][      debug]   
+[2759][      debug] GC stats for main_process_full:
+[2759][      debug]   minor_words: 2.73628e+06
+[2759][      debug]   promoted_words: 707277
+[2759][      debug]   major_words: 745451
+[2759][      debug]   minor_collections: 8
+[2759][      debug]   major_collections: 1
+[2759][      debug]   compactions: 0
+[2759][      debug]   top_heap_words: 760832
+[2759][      debug]   
+[2713][      debug] GC stats for capture:
+[2713][      debug]   minor_words: 2485
+[2713][      debug]   promoted_words: 0
+[2713][      debug]   major_words: 1696
+[2713][      debug]   minor_collections: 0
+[2713][      debug]   major_collections: 0
+[2713][      debug]   compactions: 0
+[2713][      debug]   top_heap_words: 760832
+[2713][      debug]   
+[2713][environment] Parallel jobs: 8
+[2713][   progress] Found 8 source files to analyze in /mnt/c/Users/casha/GitHub/Emcap-Saab-28-11/Excecises/src/infer-out
+[2770][   progress] Analysing block of 200 procs, starting with Vehicle::getLicensePlate
+[2769][   progress] Analysing block of 200 procs, starting with __gnu_cxx::__normal_iterator<Car* const *,std::vector<Car*,std::allocator<Car*>>>::__normal_iterator<Car_**,_void>
+[2767][   progress] Analysing block of 200 procs, starting with CarPark::addCar
+[2768][   progress] Analysing block of 200 procs, starting with Location::add
+[2771][   progress] Analysing block of 200 procs, starting with Town::run
+[2764][   progress] Analysing block of 200 procs, starting with CarPark::assignCarToHuman
+[2765][   progress] Analysing block of 200 procs, starting with __gnu_cxx::__normal_iterator<Truck* const *,std::vector<Truck*,std::allocator<Truck*>>>::__normal_iterator<Truck_**,_void>
+[2766][   progress] Analysing block of 200 procs, starting with Vehicle::~Vehicle
+[2769][   progress] Town/Town.cpp starting
+[2767][   progress] main.cpp starting
+[2768][   progress] Vehicles/Car.cpp starting
+[2765][   progress] Vehicles/Truck.cpp starting
+[2769][   progress] Town/Town.cpp DONE
+[2769][   progress] Garage/Garage.cpp starting
+[2769][   progress] Garage/Garage.cpp DONE
+[2769][   progress] Human/Human.cpp starting
+[2768][   progress] Vehicles/Car.cpp DONE
+[2768][   progress] Vehicles/Vehicle.cpp starting
+[2764][   progress] CarPark/CarPark.cpp starting
+[2769][   progress] Human/Human.cpp DONE
+[2765][   progress] Vehicles/Truck.cpp DONE
+[2768][   progress] Vehicles/Vehicle.cpp DONE
+[2767][   progress] main.cpp DONE
+[2764][   progress] CarPark/CarPark.cpp DONE
+[2765][   progress] Garage/Garage.cpp starting
+[2767][   progress] Human/Human.cpp starting
+[2767][   progress] Human/Human.cpp DONE
+[2768][   progress] Town/Town.cpp starting
+[2764][   progress] main.cpp starting
+[2769][   progress] Human/Human.cpp starting
+[2768][   progress] Town/Town.cpp DONE
+[2764][   progress] main.cpp DONE
+[2765][   progress] Garage/Garage.cpp DONE
+[2769][   progress] Human/Human.cpp DONE
+[2765][   progress] main.cpp starting
+[2765][   progress] main.cpp DONE
+[2771][   progress] main.cpp starting
+[2765][   progress] Town/Town.cpp starting
+[2771][   progress] main.cpp DONE
+[2765][   progress] Town/Town.cpp DONE
+[2769][   progress] main.cpp starting
+[2769][   progress] main.cpp DONE
+[2767][   progress] main.cpp starting
+[2768][   progress] Town/Town.cpp starting
+[2767][   progress] main.cpp DONE
+[2768][   progress] Town/Town.cpp DONE
+[2767][   progress] main.cpp starting
+[2767][   progress] main.cpp DONE
+[2766][   progress] main.cpp starting
+[2767][   progress] Town/Town.cpp starting
+[2766][   progress] main.cpp DONE
+[2767][   progress] Town/Town.cpp DONE
+[2771][   progress] main.cpp starting
+[2771][   progress] main.cpp DONE
+[2713][      debug] Backend stats:
+[2713][      debug]   summary_file_try_load= 3714
+[2713][      debug]   summary_read_from_disk= 550
+[2713][      debug]   summary_cache_hits= 1658 (30%)
+[2713][      debug]   summary_cache_misses= 3714
+[2713][      debug]   ondemand_procs_analyzed= 119
+[2713][      debug]   proc_locker_lock_time_user= 0.01356200
+[2713][      debug]   proc_locker_lock_time_sys= 0.01400600
+[2713][      debug]   proc_locker_lock_time_wall= 0.58445396
+[2713][      debug]   proc_locker_lock_time_oncpu_pct= 5%
+[2713][      debug]   proc_locker_unlock_time_user= 0.01452300
+[2713][      debug]   proc_locker_unlock_time_sys= 0.01110200
+[2713][      debug]   proc_locker_unlock_time_wall= 0.57716257
+[2713][      debug]   proc_locker_unlock_time_oncpu_pct= 4%
+[2713][      debug]   restart_scheduler_useful_time_user= 1.89816200
+[2713][      debug]   restart_scheduler_useful_time_sys= 0.84930100
+[2713][      debug]   restart_scheduler_useful_time_wall= 11.01405769
+[2713][      debug]   restart_scheduler_useful_time_oncpu_pct= 25%
+[2713][      debug]   restart_scheduler_total_time_user= 1.97151700
+[2713][      debug]   restart_scheduler_total_time_sys= 0.94837600
+[2713][      debug]   restart_scheduler_total_time_wall= 12.12544898
+[2713][      debug]   restart_scheduler_total_time_oncpu_pct= 24%
+[2713][      debug]   pulse_aliasing_contradictions= 0
+[2713][      debug]   pulse_args_length_contradictions= 0
+[2713][      debug]   pulse_captured_vars_length_contradictions= 0
+[2713][      debug]   pulse_disjuncts_dropped= 570
+[2713][      debug]   pulse_interrupted_loops= 20
+[2713][      debug]   pulse_summaries_contradictions= 0
+[2713][      debug]   pulse_summaries_unsat_for_caller= 34
+[2713][      debug]   pulse_summaries_unsat_for_caller_percent= 28
+[2713][      debug]   pulse_summaries_with_some_unreachable_nodes= 3
+[2713][      debug]   pulse_summaries_with_some_unreachable_nodes_percent= 2
+[2713][      debug]   pulse_summaries_with_some_unreachable_returns= 2
+[2713][      debug]   pulse_summaries_with_some_unreachable_returns_percent= 0.1%
+[2713][      debug]   pulse_summaries_count= [0 -> 1, 1 -> 70, 2 -> 24, 3 -> 3, 4 -> 6, 5 -> 3, 10 -> 4, 11 -> 1, 20 -> 7]
+[2713][      debug]   pulse_summaries_total_disjuncts= 357
+[2713][      debug]   pulse_summaries_count_0_continue_program= 2
+[2713][      debug]   pulse_summaries_count_0_percent= 1
+[2713][      debug]   topl_reachable_calls= 0
+[2713][      debug]   timeouts= 0
+[2713][      debug]   timings= timings for liveness:
+[2713][      debug]     p10: 0.000000s p20: 0.000009s p30: 0.000022s p40: 0.000033s
+[2713][      debug]     p50: 0.000042s p60: 0.000055s p70: 0.000087s p80: 0.000144s
+[2713][      debug]     p90: 0.000277s p95: 0.000444s p96: 0.000522s p97: 0.000565s
+[2713][      debug]     p98: 0.000844s p99: 0.001027s p99.9: 0.001117s p99.99: 0.001117s 
+[2713][      debug]   timings for parameter-not-null-checked:
+[2713][      debug]     p10: 0.000000s p20: 0.000000s p30: 0.000001s p40: 0.000003s
+[2713][      debug]     p50: 0.000011s p60: 0.000017s p70: 0.000035s p80: 0.000060s
+[2713][      debug]     p90: 0.000100s p95: 0.000123s p96: 0.000130s p97: 0.000140s
+[2713][      debug]     p98: 0.000153s p99: 0.000301s p99.9: 0.000620s p99.99: 0.000620s 
+[2713][      debug]   timings for pulse:
+[2713][      debug]     p10: 0.000005s p20: 0.000110s p30: 0.000298s p40: 0.000692s
+[2713][      debug]     p50: 0.001602s p60: 0.002506s p70: 0.004977s p80: 0.007622s
+[2713][      debug]     p90: 0.016832s p95: 0.057366s p96: 0.077557s p97: 0.083621s
+[2713][      debug]     p98: 0.109530s p99: 0.269782s p99.9: 0.523360s p99.99: 0.523360s 
+[2713][      debug]   timings for racerd:
+[2713][      debug]     p10: 0.000000s p20: 0.000000s p30: 0.000010s p40: 0.000042s
+[2713][      debug]     p50: 0.000069s p60: 0.000101s p70: 0.000204s p80: 0.000478s
+[2713][      debug]     p90: 0.001514s p95: 0.002485s p96: 0.004289s p97: 0.006319s
+[2713][      debug]     p98: 0.007635s p99: 0.022524s p99.9: 0.053008s p99.99: 0.053008s 
+[2713][      debug]   timings for self-in-block:
+[2713][      debug]     p10: 0.000000s p20: 0.000000s p30: 0.000000s p40: 0.000001s
+[2713][      debug]     p50: 0.000001s p60: 0.000002s p70: 0.000002s p80: 0.000003s
+[2713][      debug]     p90: 0.000004s p95: 0.000007s p96: 0.000008s p97: 0.000009s
+[2713][      debug]     p98: 0.000011s p99: 0.000045s p99.9: 0.000047s p99.99: 0.000047s 
+[2713][      debug]   timings for siof:
+[2713][      debug]     p10: 0.000000s p20: 0.000003s p30: 0.000035s p40: 0.000101s
+[2713][      debug]     p50: 0.000132s p60: 0.000184s p70: 0.000330s p80: 0.000596s
+[2713][      debug]     p90: 0.001337s p95: 0.002246s p96: 0.002284s p97: 0.003569s
+[2713][      debug]     p98: 0.004980s p99: 0.006678s p99.9: 0.009268s p99.99: 0.009268s 
+[2713][      debug]   timings for starvation:
+[2713][      debug]     p10: 0.000000s p20: 0.000005s p30: 0.000040s p40: 0.000110s
+[2713][      debug]     p50: 0.000239s p60: 0.000454s p70: 0.000823s p80: 0.001265s
+[2713][      debug]     p90: 0.001844s p95: 0.002884s p96: 0.003175s p97: 0.003539s
+[2713][      debug]     p98: 0.003880s p99: 0.006481s p99.9: 0.010485s p99.99: 0.010485s 
+[2713][      debug]   timings for preanalysis:
+[2713][      debug]     p10: 0.000001s p20: 0.000104s p30: 0.000292s p40: 0.000498s
+[2713][      debug]     p50: 0.000604s p60: 0.000749s p70: 0.001149s p80: 0.001680s
+[2713][      debug]     p90: 0.002724s p95: 0.003738s p96: 0.003967s p97: 0.004171s
+[2713][      debug]     p98: 0.004613s p99: 0.005103s p99.9: 0.005567s p99.99: 0.005567s 
+[2713][      debug]   
+[2713][      debug]   longest_proc_duration_heap= [
+[2713][      debug]   3533012us: Town/Town.cpp: Town::printState
+[2713][      debug]   808713us: Town/Town.cpp: Town::useRandomGarage
+[2713][      debug]   765219us: Garage/Garage.cpp: Garage::listVehicles
+[2713][      debug]   538337us: Town/Town.cpp: Town::parkVehicleInNearestCarPark
+[2713][      debug]   460494us: CarPark/CarPark.cpp: CarPark::removeTruck
+[2713][      debug]   333240us: CarPark/CarPark.cpp: CarPark::parkVehicle
+[2713][      debug]   298440us: Town/Town.cpp: Town::buildNRandomCars
+[2713][      debug]   273773us: Town/Town.cpp: Town::humanInteractsWithCar
+[2713][      debug]   261872us: Human/Human.cpp: Human::purchaseTruck
+[2713][      debug]   244725us: CarPark/CarPark.cpp: CarPark::removeCar
+[2713][      debug]   ]
+[2713][      debug]   process_times_user= 2.08606900
+[2713][      debug]   process_times_sys= 1.04930500
+[2713][      debug]   process_times_wall= 33.87275022
+[2713][      debug]   process_times_oncpu_pct= 9%
+[2713][      debug]   useful_times_user= 2.08194200
+[2713][      debug]   useful_times_sys= 1.04631200
+[2713][      debug]   useful_times_wall= 14.03700780
+[2713][      debug]   useful_times_oncpu_pct= 22%
+[2713][      debug]   spec_store_times_user= 0.04395300
+[2713][      debug]   spec_store_times_sys= 0.02845300
+[2713][      debug]   spec_store_times_wall= 1.38630033
+[2713][      debug]   spec_store_times_oncpu_pct= 5%
+[2713][      debug]   
+[2713][      debug] GC stats for backend_stats.gc_stats_add.:
+[2713][      debug]   minor_words: 2.69479e+08
+[2713][      debug]   promoted_words: 8.6917e+06
+[2713][      debug]   major_words: 1.59443e+07
+[2713][      debug]   minor_collections: 270
+[2713][      debug]   major_collections: 27
+[2713][      debug]   compactions: 0
+[2713][      debug]   top_heap_words: 18834432
+[2713][      debug]   
+[2713][      debug] GC stats for backend_stats.gc_stats_max.:
+[2713][      debug]   minor_words: 7.42882e+07
+[2713][      debug]   promoted_words: 1.52442e+06
+[2713][      debug]   major_words: 2.87568e+06
+[2713][      debug]   minor_collections: 73
+[2713][      debug]   major_collections: 4
+[2713][      debug]   compactions: 0
+[2713][      debug]   top_heap_words: 3082752
+[2713][      debug]   
+[2713][      debug] Average over 8 processes
+[2713][      debug] GC stats for backend_stats.gc_stats_average.:
+[2713][      debug]   minor_words: 3.36848e+07
+[2713][      debug]   promoted_words: 1.08646e+06
+[2713][      debug]   major_words: 1.99304e+06
+[2713][      debug]   minor_collections: 33
+[2713][      debug]   major_collections: 3
+[2713][      debug]   compactions: 0
+[2713][      debug]   top_heap_words: 2354304
+[2713][      debug]   
+[2713][      debug] Analysis phase finished in 4.43s
+[2713][      debug] backend_stats.scheduler_process_analysis_time_user= 0.10157200
+[2713][      debug] backend_stats.scheduler_process_analysis_time_sys= 0.13761000
+[2713][      debug] backend_stats.scheduler_process_analysis_time_wall= 4.42551530
+[2713][      debug] backend_stats.scheduler_process_analysis_time_oncpu_pct= 5%
+[2713][      debug] GC stats for analysis_scheduler:
+[2713][      debug]   minor_words: 2.49706e+06
+[2713][      debug]   promoted_words: 199108
+[2713][      debug]   major_words: 537097
+[2713][      debug]   minor_collections: 4
+[2713][      debug]   major_collections: 2
+[2713][      debug]   compactions: 1
+[2713][      debug]   top_heap_words: 1331712
+[2713][      debug]   
+[2713][     result] 
+CarPark/CarPark.cpp:72: error: Dead Store
+  The value written to `&car` is never used. 
+  70.     for (auto it = cars.begin(); it != cars.end(); ++it){
+  71.         if ((*it)->getLicensePlate() == licensePlate){
+  72.             Car *car = new Car(licensePlate);
+                  ^
+  73.             car = *it;
+  74.             cars.erase(it);
+
+CarPark/CarPark.cpp:90: error: Dead Store
+  The value written to `&truck` is never used. 
+  88.     for (auto it = trucks.begin(); it != trucks.end(); ++it){
+  89.         if ((*it)->getLicensePlate() == licensePlate){
+  90.             Truck *truck = new Truck(licensePlate);
+                  ^
+  91.             truck = *it;
+  92.             trucks.erase(it);
+
+Garage/Garage.cpp:44: error: Unnecessary Copy
+  copied variable `cars` is not modified after it is copied from `this->cars` on line 44. To avoid the copy, use reference `&`. If this copy was intentional, call `folly::copy` to make it explicit and hence suppress the warning.
+  42. 
+  43.  std::vector<Vehicle*> Garage::listVehicles() const{
+  44.     std::vector <Car*> cars = this->cars;
+                                    ^
+  45.     std::vector <Truck*> trucks = this->trucks;
+  46.     Location * location;
+
+Garage/Garage.cpp:45: error: Unnecessary Copy
+  copied variable `trucks` is not modified after it is copied from `this->trucks` on line 45. To avoid the copy, use reference `&`. If this copy was intentional, call `folly::copy` to make it explicit and hence suppress the warning.
+  43.  std::vector<Vehicle*> Garage::listVehicles() const{
+  44.     std::vector <Car*> cars = this->cars;
+  45.     std::vector <Truck*> trucks = this->trucks;
+                                        ^
+  46.     Location * location;
+  47. 
+
+Town/Town.cpp:250: error: Dead Store
+  The value written to `&human` is never used. 
+  248. 
+  249. void Town::cloneRandomHuman(){
+  250.     Human* human = new Human("Human" + std::to_string(humans.size()));
+           ^
+  251.    
+  252.     if (humans.size() > 0){
+
+
+Found 5 issues (console output truncated to 5, see '/mnt/c/Users/casha/GitHub/Emcap-Saab-28-11/Excecises/src/infer-out/report.txt' for the full list)
+                Issue Type(ISSUED_TYPE_ID): #
+                    Dead Store(DEAD_STORE): 3
+  Unnecessary Copy(PULSE_UNNECESSARY_COPY): 2
+
+[2713][      debug] GC stats for report:
+[2713][      debug]   minor_words: 141931
+[2713][      debug]   promoted_words: 0
+[2713][      debug]   major_words: 869
+[2713][      debug]   minor_collections: 0
+[2713][      debug]   major_collections: 0
+[2713][      debug]   compactions: 0
+[2713][      debug]   top_heap_words: 1331712
+[2713][      debug]   
+[2713][      debug] GC stats for main_process_full:
+[2713][      debug]   minor_words: 5.61128e+06
+[2713][      debug]   promoted_words: 906280
+[2713][      debug]   major_words: 1.2922e+06
+[2713][      debug]   minor_collections: 12
+[2713][      debug]   major_collections: 3
+[2713][      debug]   compactions: 1
+[2713][      debug]   top_heap_words: 1331712
+[2713][      debug]   

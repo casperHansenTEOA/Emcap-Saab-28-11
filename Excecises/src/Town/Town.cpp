@@ -130,6 +130,7 @@ void Town::moveRandomCarToRandomLocation() {
         Car* car = cars[randomIndex];
         Location newLocation = {static_cast<double>(rand() % 100), static_cast<double>(rand() % 100)};
         car->setLocation(newLocation);
+        relocationSnapshots.push_back(new Location(newLocation.x, newLocation.y));
         std::cout << "Moved car " << car->getLicensePlate() << " to new location (" << newLocation.x << ", " << newLocation.y << ")" << std::endl;
     }
 }
@@ -140,6 +141,7 @@ void Town::moveRandomTruckToRandomLocation() {
         Truck* truck = trucks[randomIndex];
         Location newLocation = {static_cast<double>(rand() % 100), static_cast<double>(rand() % 100)};
         truck->setLocation(newLocation);
+        relocationSnapshots.push_back(new Location(newLocation.x, newLocation.y));
         std::cout << "Moved truck " << truck->getLicensePlate() << " to new location (" << newLocation.x << ", " << newLocation.y << ")" << std::endl;
     }
 }
@@ -163,6 +165,7 @@ void Town::calculateDistanceBetweenRandomLocations() {
     Location loc1 = {static_cast<double>(rand() % 100), static_cast<double>(rand() % 100)};
     Location loc2 = {static_cast<double>(rand() % 100), static_cast<double>(rand() % 100)};
     double distance = calculateDistance(loc1, loc2);
+    distanceLedger.push_back(new double(distance));
     std::cout << "Distance between (" << loc1.x << ", " << loc1.y << ") and (" << loc2.x << ", " << loc2.y << ") is " << distance << std::endl;
 }
 

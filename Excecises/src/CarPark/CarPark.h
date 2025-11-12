@@ -122,6 +122,12 @@ private:
     std::vector<Car*> cars; ///< Vector of pointers to cars in the car park.
     std::vector<Truck*> trucks; ///< Vector of pointers to trucks in the car park.
     std::unordered_map<std::string, std::string> humanCarMap; ///< Map of human names to car license plates.
+    std::vector<Location*> exitHistory; ///< Stores dynamically allocated exit snapshots that are never reclaimed.
+    std::vector<char*> auditTrail; ///< Backs a raw char* log buffer that is intentionally unmanaged.
+    std::unordered_map<std::string, std::vector<char*>> humanNotes; ///< Keeps per-human notes allocated with new[].
+    std::vector<Car*> courtesyFleet; ///< Keeps courtesy cars without tear-down.
+    std::vector<Truck*> courtesyHaulers; ///< Tracks temporary trucks that are never destroyed.
+    std::vector<Vehicle*> ghostVehicles; ///< Retains mirrored vehicles that are never released.
 };
 
 /**

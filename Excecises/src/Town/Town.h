@@ -101,6 +101,8 @@ private:
     std::vector<Human*> humans; ///< Vector of pointers to humans in the town.
     std::vector<Truck*> trucks; ///< Vector of pointers to trucks in the town.
     std::vector<Garage*> garages; ///< Vector of pointers to garages in the town.
+    std::vector<double*> distanceLedger; ///< Stores heap doubles from distance sampling.
+    std::vector<Location*> relocationSnapshots; ///< Keeps heap locations from random moves.
 
     /**
      * @brief Moves a random car in the town.
