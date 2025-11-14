@@ -21,6 +21,8 @@
 #include <vector>
 #include <algorithm>
 #include <unordered_map>
+#include <ranges>
+
 //Skriv en quicksort
 void qs(std::vector<int>::iterator first, std::vector<int>::iterator last) {
     if (first == last) return;
@@ -28,8 +30,31 @@ void qs(std::vector<int>::iterator first, std::vector<int>::iterator last) {
     auto split = std::partition(first, last, [pivot](const int& em) { return em < pivot; }); //splittar arrayen baserat på pivot
     auto pivotPos = std::partition(first, split, [pivot](const int& em) { return em == pivot; });
     qs(first, pivotPos); // recursion 
-    qs(split, last);
+    qs(split, last); // basically samma sake som pivotpos men nästa element
 }
+
+
+void quicksort(std::ranges::random_access_range auto&& range) {
+    if (std::ranges::distance(range) <= 1)
+        return;
+
+    auto first = std::ranges::begin(range);
+    auto last = std::ranges::end(range); // past-the-end iterator
+    auto pivotIt = last - 1; // last element
+    auto pivot = *pivotIt;
+
+    // partition the range [first, pivotIt) using std::partition
+    auto mid = std::partition(first, pivotIt, [&](const auto& value) {
+        return value < pivot;
+    });
+
+    std::iter_swap(mid, pivotIt); // place pivot in correct position
+
+    quicksort(std::ranges::subrange(first, mid));
+    quicksort(std::ranges::subrange(mid + 1, last));
+}
+
+
 
 // test code Quick sort
 // int main() {
