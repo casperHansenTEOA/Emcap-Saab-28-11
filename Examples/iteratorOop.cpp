@@ -1,8 +1,9 @@
+#include <algorithm>
 #include <iostream>
 
 #include <vector>
 #include <list>
-
+# include <string>
 
 template <typename T>
 class Container {
@@ -33,6 +34,23 @@ int main() {
 
     vecContainer.printElements();
     listContainer.printElements();
+
+    // sort container elements using iterators
+    std::sort(vec.rbegin(), vec.rend(), std::greater<int>());
+    std::cout << "\nSorted vector in descending order: ";
+    for (const auto& num : vec) {
+        std::cout << num << " ";
+    }
+    // sort backwards 
+    std::sort(vec.end(), vec.begin(), std::greater<int>());
+    std::cout << "\nSorted vector in ascending order: ";
+    for (const auto& num : vec) {
+        std::cout << num << " ";
+    }
+
+
+
+
 
     return 0;
 }
