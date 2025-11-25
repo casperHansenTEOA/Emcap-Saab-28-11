@@ -13,19 +13,12 @@ int main(){
     //and sort reversely but omitting the last 5 elements like this
     std::sort(vec.rbegin() + 5, vec.rend(), std::greater<int>());
 
-    std::cout << "Sorted vector in descending order: ";
-    for (const auto& num : vec) {
-        std::cout << num << " ";
-    }
-    std::cout << std::endl;
+
     // with ranges one can do it like this
     std::ranges::sort(vec);
     // and 
     std::ranges::sort(std::views::drop(std::views::reverse(vec), 5));
-    std::cout << "Sorted vector in descending order using ranges: ";
-    for (const auto& num : vec) {
-        std::cout << num << " ";
-    }
-    std::cout << std::endl;
+
     return 0;
 }
+
