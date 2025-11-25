@@ -119,9 +119,8 @@ void Town::run() {
     printState(rotation);
     MemoryTracker::logRotation(rotation);
         ++rotation;
-        // sleep for a short duration to simulate time passing
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
-    }
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+            }
 }
 
 void Town::moveRandomCarToRandomLocation() {

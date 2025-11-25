@@ -20,7 +20,6 @@ The simulation models a fictional town populated with humans, vehicles, garages,
    - Allocates a `Town` and populates it with 100 iterations of randomly generated cars, trucks, humans, garages, and car parks.
    - Each human purchases the vehicles created in that iteration and lists their inventory.
 2. **Main Loop (`Town::run`)**
-   - Loops forever with a 500 ms delay between iterations.
    - Picks one of several actions at random: move vehicles, interact with vehicles, use garages, clone humans, build extra cars, relocate vehicles, park in the nearest car park, or sample distances between random points.
    - Logs the current allocation counters and prints a snapshot of the town (sample humans, vehicles, and car parks).
 3. **Entity Behavior**
