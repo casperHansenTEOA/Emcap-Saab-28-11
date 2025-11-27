@@ -39,7 +39,6 @@ CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
 CTestTestfile.cmake
-Makefile
 
 # Visual Studio and VS Code
 .vs/
