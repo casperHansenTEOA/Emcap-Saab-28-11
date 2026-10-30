@@ -6,9 +6,9 @@ The simulation models a fictional town populated with humans, vehicles, garages,
 
 ## Core Components
 
-- `Town`: Owns collections of cars, trucks, humans, garages, and car parks. It schedules random actions every half second and prints periodic summaries of the town state.
+- `Town`: Owns collections of cars, humans, garages, and car parks. It schedules random actions every half second and prints periodic summaries of the town state.
 - `Human`: Represents a resident that can purchase vehicles and share garages. Humans can clone themselves and manage the vehicles stored in their assigned garages.
-- `Vehicle`, `Car`, `Truck`: `Vehicle` provides basic movement and location tracking. `Car` and `Truck` wrap a `Vehicle` instance and expose domain-specific behavior and data.
+- `Vehicle`, `Car`: `Vehicle` provides basic movement and location tracking. `Car` wraps a `Vehicle` instance and exposes domain-specific behavior and data.
 - `Garage`: Stores vehicles for humans. When used, it lists the current inventory and can release vehicles back into the simulation.
 - `CarPark`: Represents public parking locations. It can park and release vehicles, track per-human assignments, and compute distances to support nearest car park searches.
 - `MemoryTracker`: Overrides global new/delete to count allocations and logs the totals to `memory_log.csv` for each simulation rotation.
@@ -17,7 +17,7 @@ The simulation models a fictional town populated with humans, vehicles, garages,
 
 1. **Bootstrap (`main.cpp`)**
    - Initializes the memory tracker with `memory_log.csv`.
-   - Allocates a `Town` and populates it with 100 iterations of randomly generated cars, trucks, humans, garages, and car parks.
+   - Allocates a `Town` and populates it with 100 iterations of randomly generated cars, humans, garages, and car parks.
    - Each human purchases the vehicles created in that iteration and lists their inventory.
 2. **Main Loop (`Town::run`)**
    - Loops forever with a 500 ms delay between iterations.
