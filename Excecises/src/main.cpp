@@ -1,16 +1,17 @@
-// #include "Garage/Garage.h"
-// #include "Garage/Garage.h"
-// #include "Town/Town.h"
+
 #include "MemoryTracker.h"
-// #include "Vehicles/Vehicle.h"
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <algorithm>
+#include <cmath>
+#include <limits>
 
-char *allocateLogEntry(const std::string &message) {
+char *allocateLogEntry(const std::string &message)
+{
   char *buffer = new char[message.size() + 1];
   std::copy(message.c_str(), message.c_str() + message.size() + 1, buffer);
   return buffer;
@@ -22,19 +23,23 @@ char *allocateLogEntry(const std::string &message) {
  *
  * @return A randomly generated license plate.
  */
-char *generateRandomLicensePlate() {
+char *generateRandomLicensePlate()
+{
   char *licensePlate = new char[7];
-  for (int i = 0; i < 3; ++i) {
+  for (int i = 0; i < 3; ++i)
+  {
     licensePlate[i] = static_cast<char>('A' + rand() % 26);
   }
-  for (int i = 0; i < 3; ++i) {
+  for (int i = 0; i < 3; ++i)
+  {
     licensePlate[3 + i] = static_cast<char>('0' + rand() % 10);
   }
   licensePlate[6] = '\0';
   return licensePlate;
 };
 
-class Location {
+class Location
+{
 public:
   double x; ///< The x-coordinate of the location.
   double y; ///< The y-coordinate of the location.
@@ -45,17 +50,26 @@ public:
    * @param loc2 The second location.
    * @return The sum of the two locations.
    */
-  Location *add(const Location &loc1, const Location &loc2) {
+  Location *add(const Location &loc1, const Location &loc2)
+  {
     return new Location(loc1.x + loc2.x, loc1.y + loc2.y);
   };
 
   Location(double x, double y) : x(x), y(y) {}
 };
 
-enum class Direction { North, East, South, West };
+enum class Direction
+{
+  North,
+  East,
+  South,
+  West
+};
 
-Location directionToLocation(Direction direction) {
-  switch (direction) {
+Location directionToLocation(Direction direction)
+{
+  switch (direction)
+  {
   case Direction::North:
     return {0, 1};
   case Direction::East:
@@ -68,13 +82,16 @@ Location directionToLocation(Direction direction) {
   return {0, 0};
 }
 
-double calculateDistance(const Location &loc1, const Location &loc2) {
+double calculateDistance(const Location &loc1, const Location &loc2)
+{
   return sqrt(pow(loc1.x - loc2.x, 2) + pow(loc1.y - loc2.y, 2));
 };
 
-class Vehicle {
+class Vehicle
+{
 public:
-  Vehicle(const std::string &licensePlate, Location &location) {
+  Vehicle(const std::string &licensePlate, Location &location)
+  {
     this->licensePlate = new std::string(licensePlate);
     this->currentLocation = &location;
   };
@@ -83,8 +100,10 @@ public:
 
   bool isMoving() const { return moving; };
 
-  bool move(Direction direction) {
-    if (moving) {
+  bool move(Direction direction)
+  {
+    if (moving)
+    {
       return false;
     }
     currentLocation = currentLocation->add(*this->currentLocation,
@@ -93,19 +112,23 @@ public:
     return true;
   };
 
-  bool stop() {
-    if (!moving) {
+  bool stop()
+  {
+    if (!moving)
+    {
       return false;
     }
     moving = false;
     return true;
   };
 
-  double calculateDistance(const Location &loc1, const Location &loc2) const {
+  double calculateDistance(const Location &loc1, const Location &loc2) const
+  {
     return sqrt(pow(loc1.x - loc2.x, 2) + pow(loc1.y - loc2.y, 2));
   };
 
-  double getDistanceTraveled() const {
+  double getDistanceTraveled() const
+  {
     return calculateDistance({0, 0}, *currentLocation);
   };
 
@@ -117,14 +140,16 @@ public:
 
 private:
   std::string *licensePlate; ///< Pointer to the license plate string.
-  bool moving;
+  bool moving = false;       ///< Indicates whether the vehicle is currently moving.
   Location *currentLocation;
 };
 
-class Car {
+class Car
+{
 public:
   Car(const std::string &licensePlate)
-      : vehicle(licensePlate, *new Location{0, 0}) {
+      : vehicle(licensePlate, *new Location{0, 0})
+  {
     this->licensePlate = new std::string(licensePlate);
   }
 
@@ -136,7 +161,8 @@ public:
 
   std::string getLicensePlate() { return vehicle.getLicensePlate(); }
 
-  double getDistanceTraveled() const {
+  double getDistanceTraveled() const
+  {
     return this->vehicle.calculateDistance({0, 0}, this->vehicle.getLocation());
   }
 
@@ -149,18 +175,23 @@ private:
   std::string *licensePlate;
 };
 
-class Garage {
+class Garage
+{
 public:
   Garage() { cars = std::vector<Car *>(); }
 
-  void addCar(Car *car) {
+  void addCar(Car *car)
+  {
     car->stop();
     cars.push_back(car);
   };
 
-  Car *takeCar(const std::string &licensePlate) {
-    for (Car *car : cars) {
-      if (car->getLicensePlate() == licensePlate) {
+  Car *takeCar(const std::string &licensePlate)
+  {
+    for (Car *car : cars)
+    {
+      if (car->getLicensePlate() == licensePlate)
+      {
         cars.erase(std::remove(cars.begin(), cars.end(), car), cars.end());
 
         car->move(Direction::North);
@@ -170,13 +201,15 @@ public:
     return nullptr;
   };
 
-  std::vector<Vehicle *> listVehicles() const {
+  std::vector<Vehicle *> listVehicles() const
+  {
     std::vector<Car *> cars = this->cars;
 
     Location *location;
 
     std::vector<Vehicle *> vehicles;
-    for (Car *car : cars) {
+    for (Car *car : cars)
+    {
       std::cout << "Car: " << car->getLicensePlate() << std::endl;
       location = new Location(car->getLocation().x, car->getLocation().y);
       vehicles.push_back(new Vehicle(car->getLicensePlate(), *location));
@@ -189,22 +222,26 @@ private:
   std::vector<Car *> cars; ///< Vector of pointers to cars in the garage.
 };
 
-class Human {
+class Human
+{
 public:
-  Human(const std::string &name) {
+  Human(const std::string &name)
+  {
     this->name = new std::string(name);
     garage = new Garage();
   };
 
   void addGarage(Garage *garage) { this->garage = garage; };
-  void purchaseCar(const std::string &licensePlate) {
+  void purchaseCar(const std::string &licensePlate)
+  {
     Car *car = new Car(licensePlate);
     addCarToGarage(car);
   }
 
   void addCarToGarage(Car *car) { garage->addCar(car); };
 
-  Car *takeCarFromGarage(const std::string &licensePlate) {
+  Car *takeCarFromGarage(const std::string &licensePlate)
+  {
     return garage->takeCar(licensePlate);
   };
 
@@ -212,7 +249,8 @@ public:
 
   std::string getName() const { return *name; };
 
-  Human *clone() {
+  Human *clone()
+  {
     Human *clone = new Human(*name);
     return clone;
   };
@@ -222,14 +260,17 @@ private:
   Garage *garage;    ///< Pointer to the garage owned by the human.
 };
 
-class CarPark {
+class CarPark
+{
 
 public:
   CarPark(const Location &location, int capacity)
       : location(location), capacity(capacity), currentCars(0) {}
 
-  bool addCar(Car *car) {
-    if (currentCars < capacity) {
+  bool addCar(Car *car)
+  {
+    if (currentCars < capacity)
+    {
       car->stop();
       cars.push_back(car);
       auditTrail.push_back(
@@ -240,9 +281,12 @@ public:
     return false;
   };
 
-  bool removeCar(const std::string &licensePlate) {
-    for (auto it = cars.begin(); it != cars.end(); ++it) {
-      if ((*it)->getLicensePlate() == licensePlate) {
+  bool removeCar(const std::string &licensePlate)
+  {
+    for (auto it = cars.begin(); it != cars.end(); ++it)
+    {
+      if ((*it)->getLicensePlate() == licensePlate)
+      {
         Car *car = new Car(licensePlate);
         car = *it;
         cars.erase(it);
@@ -258,29 +302,34 @@ public:
     return false;
   }
 
-  bool parkVehicle(Vehicle *vehicle) {
+  bool parkVehicle(Vehicle *vehicle)
+  {
     Location snapshot = vehicle->getLocation();
     Location *ghostLocation = new Location(snapshot.x, snapshot.y);
     ghostVehicles.push_back(
         new Vehicle(vehicle->getLicensePlate(), *ghostLocation));
     auditTrail.push_back(
         allocateLogEntry("park:" + vehicle->getLicensePlate()));
-    if (Car *car = dynamic_cast<Car *>(vehicle)) { // TODO casting is cringe
+    if (Car *car = dynamic_cast<Car *>(vehicle))
+    { // TODO casting is cringe
       return addCar(car);
     }
     return false;
   }
 
   void assignCarToHuman(const std::string &humanName,
-                        const std::string &licensePlate) {
+                        const std::string &licensePlate)
+  {
     humanCarMap[humanName] = licensePlate;
     std::string note = humanName + "->" + licensePlate;
     humanNotes[humanName].push_back(allocateLogEntry(note));
     auditTrail.push_back(allocateLogEntry("assign:" + note));
   };
 
-  std::string getCarOfHuman(const std::string &humanName) {
-    if (humanCarMap.find(humanName) != humanCarMap.end()) {
+  std::string getCarOfHuman(const std::string &humanName)
+  {
+    if (humanCarMap.find(humanName) != humanCarMap.end())
+    {
       return humanCarMap[humanName];
     }
     return "No car assigned";
@@ -295,39 +344,43 @@ public:
   bool hasSpace() const { return currentCars < capacity; }
 
 private:
-  Location location; ///< The location of the car park.
-  int capacity;      ///< The maximum number of vehicles the car park can hold.
-  int currentCars;   ///< The current number of vehicles in the car park.
+  Location location;       ///< The location of the car park.
+  int capacity;            ///< The maximum number of vehicles the car park can hold.
+  int currentCars;         ///< The current number of vehicles in the car park.
   std::vector<Car *> cars; ///< Vector of pointers to cars in the car park.
 
   std::unordered_map<std::string, std::string>
-      humanCarMap; ///< Map of human names to car license plates.
+      humanCarMap;                     ///< Map of human names to car license plates.
   std::vector<Location *> exitHistory; ///< Stores dynamically allocated exit
                                        ///< snapshots that are never reclaimed.
   std::vector<char *> auditTrail;      ///< Backs a raw char* log buffer that is
                                        ///< intentionally unmanaged.
   std::unordered_map<std::string, std::vector<char *>>
-      humanNotes; ///< Keeps per-human notes allocated with new[].
+      humanNotes;                   ///< Keeps per-human notes allocated with new[].
   std::vector<Car *> courtesyFleet; ///< Keeps courtesy cars without tear-down.
   std::vector<Vehicle *>
       ghostVehicles; ///< Retains mirrored vehicles that are never released.
 };
 
 CarPark *findNearestAvailableCarPark(const std::vector<CarPark *> &carParks,
-                                     const Location &currentLocation) {
+                                     const Location &currentLocation)
+{
   CarPark *nearestCarPark = nullptr;
   double minDistance = std::numeric_limits<double>::max();
-  for (CarPark *carPark : carParks) {
+  for (CarPark *carPark : carParks)
+  {
     double distance =
         calculateDistance(currentLocation, carPark->getLocation());
-    if (distance < minDistance && carPark->hasSpace()) {
+    if (distance < minDistance && carPark->hasSpace())
+    {
       minDistance = distance;
       nearestCarPark = carPark;
     }
   }
   return nearestCarPark;
 };
-class Town {
+class Town
+{
 
 public:
   void addCarPark(CarPark *carPark) { carParks.push_back(carPark); };
@@ -346,21 +399,25 @@ public:
 
   const std::vector<Garage *> &getGarages() const { return garages; };
 
-  Garage *buildGarage() {
+  Garage *buildGarage()
+  {
     Garage *garage = new Garage();
     return garage;
   }
 
-  void run() {
+  void run(std::size_t rotationCount)
+  {
     srand(static_cast<unsigned int>(
         time(0))); // Seed for random number generation
 
     std::size_t rotation = 0;
     MemoryTracker::logRotation(rotation);
-    while (true) {
+    while (rotation < rotationCount)
+    {
       std::cout << "Rotation " << rotation << std::endl;
       int action = rand() % 8; // Increase the range to accommodate new actions
-      switch (action) {
+      switch (action)
+      {
       case 0:
         moveRandomCar();
         break;
@@ -373,9 +430,11 @@ public:
       case 3:
         cloneRandomHuman();
         break;
-      case 4: {
+      case 4:
+      {
         std::vector<Car *> cars = buildNRandomCars(2);
-        for (Car *car : cars) {
+        for (Car *car : cars)
+        {
           addCar(car);
         }
         break;
@@ -399,17 +458,19 @@ public:
 
 private:
   std::vector<CarPark *>
-      carParks;                ///< Vector of pointers to car parks in the town.
-  std::vector<Car *> cars;     ///< Vector of pointers to cars in the town.
-  std::vector<Human *> humans; ///< Vector of pointers to humans in the town.
+      carParks;                  ///< Vector of pointers to car parks in the town.
+  std::vector<Car *> cars;       ///< Vector of pointers to cars in the town.
+  std::vector<Human *> humans;   ///< Vector of pointers to humans in the town.
   std::vector<Garage *> garages; ///< Vector of pointers to garages in the town.
   std::vector<double *>
       distanceLedger; ///< Stores heap doubles from distance sampling.
   std::vector<Location *>
       relocationSnapshots; ///< Keeps heap locations from random moves.
 
-  void moveRandomCarToRandomLocation() {
-    if (cars.size() > 0) {
+  void moveRandomCarToRandomLocation()
+  {
+    if (cars.size() > 0)
+    {
       int randomIndex = rand() % cars.size();
       Car *car = cars[randomIndex];
       Location newLocation = {static_cast<double>(rand() % 100),
@@ -422,27 +483,33 @@ private:
     }
   }
 
-  void parkVehicleInNearestCarPark() {
-    if (cars.size() > 0 && carParks.size() > 0) {
+  void parkVehicleInNearestCarPark()
+  {
+    if (cars.size() > 0 && carParks.size() > 0)
+    {
       int randomCarIndex = rand() % cars.size();
       Car *car = cars[randomCarIndex];
       Location carLocation = car->getLocation();
       CarPark *nearestCarPark =
           findNearestAvailableCarPark(carParks, carLocation);
-      if (nearestCarPark != nullptr) {
+      if (nearestCarPark != nullptr)
+      {
         nearestCarPark->addCar(car);
         std::cout << "Parked car " << car->getLicensePlate()
                   << " in nearest car park at location ("
                   << nearestCarPark->getLocation().x << ", "
                   << nearestCarPark->getLocation().y << ")" << std::endl;
-      } else {
+      }
+      else
+      {
         std::cout << "No available car park found for car "
                   << car->getLicensePlate() << std::endl;
       }
     }
   }
 
-  void calculateDistanceBetweenRandomLocations() {
+  void calculateDistanceBetweenRandomLocations()
+  {
     Location loc1 = {static_cast<double>(rand() % 100),
                      static_cast<double>(rand() % 100)};
     Location loc2 = {static_cast<double>(rand() % 100),
@@ -453,8 +520,10 @@ private:
               << loc2.x << ", " << loc2.y << ") is " << distance << std::endl;
   }
 
-  void moveRandomCar() {
-    if (cars.size() > 0) {
+  void moveRandomCar()
+  {
+    if (cars.size() > 0)
+    {
       int randomIndex = rand() % cars.size();
       Car *car = cars[randomIndex];
       cars.erase(cars.begin() + randomIndex);
@@ -465,8 +534,10 @@ private:
   /**
    * @brief A human interacts with a random car in the town.
    */
-  void humanInteractsWithCar() {
-    if (humans.size() > 0 && cars.size() > 0) {
+  void humanInteractsWithCar()
+  {
+    if (humans.size() > 0 && cars.size() > 0)
+    {
       int randomHumanIndex = rand() % humans.size();
       Human *human = humans[randomHumanIndex];
       int randomCarIndex = rand() % cars.size();
@@ -475,16 +546,19 @@ private:
     }
   };
 
-  std::vector<Car *> buildNRandomCars(int n) {
+  std::vector<Car *> buildNRandomCars(int n)
+  {
     char **licensePlates = new char *[n];
 
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; ++i)
+    {
       licensePlates[i] = generateRandomLicensePlate();
     }
 
     std::vector<Car *> cars;
 
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; ++i)
+    {
       Car *car = new Car(licensePlates[i]);
       cars.push_back(car);
     }
@@ -492,18 +566,22 @@ private:
     return cars;
   };
 
-  void useRandomGarage() {
-    if (garages.size() > 0) {
+  void useRandomGarage()
+  {
+    if (garages.size() > 0)
+    {
       int randomIndex = rand() % garages.size();
       Garage *garage = garages[randomIndex];
       garage->listVehicles();
     }
   };
 
-  void cloneRandomHuman() {
+  void cloneRandomHuman()
+  {
     Human *human = new Human("Human" + std::to_string(humans.size()));
 
-    if (humans.size() > 0) {
+    if (humans.size() > 0)
+    {
       int randomIndex = rand() % humans.size();
       human = humans[randomIndex];
       human = human->clone();
@@ -511,27 +589,33 @@ private:
     }
   };
 
-  void printState(std::size_t rotation) const {
+  void printState(std::size_t rotation) const
+  {
     constexpr std::size_t previewCount = 3;
     std::cout << "\n=== Town state after rotation " << rotation << " ===\n";
     std::cout << "Humans: " << humans.size() << ", Cars: " << cars.size()
               << ", Garages: " << garages.size()
               << ", Car parks: " << carParks.size() << '\n';
 
-    if (!humans.empty()) {
+    if (!humans.empty())
+    {
       std::cout << "  Sample humans:";
-      for (std::size_t i = 0; i < std::min(previewCount, humans.size()); ++i) {
+      for (std::size_t i = 0; i < std::min(previewCount, humans.size()); ++i)
+      {
         std::cout << " " << humans[i]->getName();
       }
-      if (humans.size() > previewCount) {
+      if (humans.size() > previewCount)
+      {
         std::cout << " ...";
       }
       std::cout << '\n';
     }
 
-    if (!cars.empty()) {
+    if (!cars.empty())
+    {
       std::cout << "  Sample cars:" << '\n';
-      for (std::size_t i = 0; i < std::min(previewCount, cars.size()); ++i) {
+      for (std::size_t i = 0; i < std::min(previewCount, cars.size()); ++i)
+      {
         Car *car = cars[i];
         Location loc = car->getLocation();
         std::cout << "    #" << (i + 1) << " " << car->getLicensePlate()
@@ -539,10 +623,12 @@ private:
       }
     }
 
-    if (!carParks.empty()) {
+    if (!carParks.empty())
+    {
       std::cout << "  Car parks: " << '\n';
       for (std::size_t i = 0; i < std::min(previewCount, carParks.size());
-           ++i) {
+           ++i)
+      {
         const CarPark *carPark = carParks[i];
         const Location &loc = carPark->getLocation();
         std::cout << "    #" << (i + 1) << " capacity "
@@ -550,7 +636,8 @@ private:
                   << carPark->getCurrentLoad() << " @ (" << loc.x << ", "
                   << loc.y << ")" << '\n';
       }
-      if (carParks.size() > previewCount) {
+      if (carParks.size() > previewCount)
+      {
         std::cout << "    ..." << '\n';
       }
     }
@@ -563,7 +650,8 @@ private:
  *
  * @return Exit status of the program.
  */
-int main() {
+int main()
+{
   MemoryTracker::initialize("../../memory_log.csv");
   // all the things that go in a town
   Car *car;
@@ -573,7 +661,8 @@ int main() {
   Town *town = new Town();
   // generates a bumch of random cars and car parks and garages and humans and
   // traucks and runs the simulation
-  for (int i = 0; i < 100; ++i) {
+  for (int i = 0; i < 100; ++i)
+  {
     // Create random cars
     char *licensePlate = generateRandomLicensePlate();
     car = new Car(licensePlate);
@@ -586,13 +675,15 @@ int main() {
     town->addHuman(human);
 
     // make every other human own the same garage
-    if (i % 2 == 0) {
+    if (i % 2 == 0)
+    {
       garage = new Garage();
     }
     human->addGarage(garage);
     town->addGarage(garage);
     // Create random garages that dont belong to any human
-    for (int j = 0; j < 10; ++j) {
+    for (int j = 0; j < 10; ++j)
+    {
       garage = town->buildGarage();
       town->addGarage(garage);
     }
@@ -612,6 +703,6 @@ int main() {
   delete carPark;
   delete human;
 
-  town->run();
+  town->run(10000);
   return 0;
 };

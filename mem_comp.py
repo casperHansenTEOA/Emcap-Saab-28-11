@@ -9,24 +9,41 @@ if os.path.exists('memory_log.csv'):
     os.remove('memory_log.csv')
 
 # Option A: use project Makefile (preferred if present)
-os.system('cd Excecises/src && make')
+subprocess.run(
+    [
+        "g++",
+        "-std=c++20",
+        "-Wall",
+        "-Wextra",
+        "-pedantic",
+        "main.cpp",
+        "MemoryTracker.cpp",
+        "-o",
+        "town_sim.exe",
+    ],
+    cwd="Excecises/src",
+    check=True,
+)
 
 
-
-# Start the program town_sim.exe (Windows) or ./town_sim (Linux/Mac) then wait a bit  
+# Start the program town_sim.exe (Windows) or ./town_sim (Linux/Mac) then wait a bit
 print("Successfully compiled .Starting town_sim...")
 # check were in the right directory
 os.system("dir")
 os.chdir("Excecises/src")  # Change to the directory where the executable is located
-proc = subprocess.Popen(['./town_sim.exe' if os.name == 'nt' else './town_sim'])
+
+proc = None
 try:
-    print("Running town_sim for 60 seconds to collect memory usage data...")
-    time.sleep(60)
+    print("Running town_sim for 10000 rotations to collect memory usage data...")
+    proc = subprocess.Popen(["./town_sim.exe" if os.name == "nt" else "./town_sim"])
+    proc.wait(timeout=60)
+except subprocess.TimeoutExpired:
+    print("The program exceeded the timeout; terminating it as a fallback.")
+    proc.terminate()
+    proc.wait(timeout=5)
 
 finally:
     print("Finished running town_sim.")
-    proc.terminate()
-    proc.wait(timeout=5)
 
 # Only proceed if memory_log.csv exists
 os.chdir("../../")  # Change back to original directory
@@ -37,7 +54,7 @@ df = pd.read_csv('memory_log.csv')
 
 plt.plot(df['rotation'], df['outstanding_allocations'])
 plt.xlabel('Rotation')
-plt.ylabel('Outstanding Allocations (bytes)')
+plt.ylabel('Outstanding Allocations (times)')
 plt.title('Memory Usage Over Time')
 plt.grid()
 plt.savefig('memory_usage.png')

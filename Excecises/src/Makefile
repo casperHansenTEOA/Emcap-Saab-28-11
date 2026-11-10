@@ -5,14 +5,7 @@ LDFLAGS ?=
 TARGET := town_sim
 
 SOURCES := main.cpp \
-    CarPark/CarPark.cpp \
-    Garage/Garage.cpp \
-    Human/Human.cpp \
-    Town/Town.cpp \
-    MemoryTracker.cpp \
-    Vehicles/Car.cpp \
-    Vehicles/Truck.cpp \
-    Vehicles/Vehicle.cpp
+	MemoryTracker.cpp
 
 OBJECTS := $(SOURCES:.cpp=.o)
 
