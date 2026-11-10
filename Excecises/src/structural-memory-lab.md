@@ -72,10 +72,7 @@ earlier passing test must stay passing.
 
 ### Checkpoint
 
-You should be able to explain the lifetime of one car from creation through storage, movement, parking, and program exit.
-
-Milestone 1 is clear when the baseline table is complete, the current
-ownership graph is drawn, and the warnings and known failures are recorded.
+You should be able to explain the lifetime of one car from creation through storage, movement, parking, and program exit. Milestone 1 is doen when you can do this.
 
 ## Milestone 2: Remove Unnecessary Heap Allocation
 
