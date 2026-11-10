@@ -310,11 +310,8 @@ public:
         new Vehicle(vehicle->getLicensePlate(), *ghostLocation));
     auditTrail.push_back(
         allocateLogEntry("park:" + vehicle->getLicensePlate()));
-    if (Car *car = dynamic_cast<Car *>(vehicle))
-    { // TODO casting is cringe
-      return addCar(car);
-    }
-    return false;
+    Car *car = new Car(vehicle->getLicensePlate());
+    return addCar(car);
   }
 
   void assignCarToHuman(const std::string &humanName,
@@ -650,6 +647,7 @@ private:
  *
  * @return Exit status of the program.
  */
+#ifndef TOWN_SIM_NO_MAIN
 int main()
 {
   MemoryTracker::initialize("../../memory_log.csv");
@@ -706,3 +704,4 @@ int main()
   town->run(10000);
   return 0;
 };
+#endif
