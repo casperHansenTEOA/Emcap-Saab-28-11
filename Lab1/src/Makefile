@@ -5,7 +5,6 @@ LDFLAGS ?=
 TARGET := town_sim
 
 SOURCES := main.cpp \
-	MemoryTracker.cpp
 
 OBJECTS := $(SOURCES:.cpp=.o)
 
