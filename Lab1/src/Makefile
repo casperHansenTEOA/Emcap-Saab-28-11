@@ -1,14 +1,16 @@
 CXX ?= g++
-CXXFLAGS := -std=c++20 -Wall -Wextra -pedantic -I.
+CXXFLAGS := -std=c++20 -Wall -Wextra -Wpedantic -Werror -pedantic-errors -I.
 LDFLAGS ?=
+RM := del /Q
 
 TARGET := town_sim
 
-SOURCES := main.cpp \
-
+SOURCES := main.cpp
 OBJECTS := $(SOURCES:.cpp=.o)
+TEST_SOURCES := tests/tests.cpp
+TEST_OBJECTS := $(TEST_SOURCES:.cpp=.o)
 
-.PHONY: all clean run
+.PHONY: all clean run test
 
 all: $(TARGET)
 
@@ -21,5 +23,11 @@ $(TARGET): $(OBJECTS)
 run: $(TARGET)
 	./$(TARGET)
 
+test:
+	@echo "No runnable tests configured for Lab1."
+
+tests/%.o: tests/%.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
 clean:
-	-$(RM) $(OBJECTS) $(TARGET) $(TARGET).exe
+	-$(RM) $(OBJECTS) $(TEST_OBJECTS) $(TARGET) $(TARGET).exe
