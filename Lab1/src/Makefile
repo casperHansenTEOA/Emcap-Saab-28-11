@@ -30,4 +30,5 @@ tests/%.o: tests/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	-$(RM) $(OBJECTS) $(TEST_OBJECTS) $(TARGET) $(TARGET).exe
+	-$(RM) $(OBJECTS) $(TARGET) $(TARGET).exe
+	-$(RM) tests\tests.o
